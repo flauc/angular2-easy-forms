@@ -32,7 +32,6 @@ export class QuestionComponent {
 
     test() {
         console.log(this.form.controls[this.question.key]);
-        console.log(this.form.controls[this.question.key].getError())
     }
     
     errors() {
