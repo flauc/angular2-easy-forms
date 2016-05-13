@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/common';
-import {isArray} from 'rxjs/util/isArray';
 
 @Injectable()
 export class ControlGroupService {
     constructor(
-        private fb:FormBuilder
+        private fb: FormBuilder
     ) {}
 
     create(questions) {
@@ -17,7 +16,7 @@ export class ControlGroupService {
 
             if (a.validation) {
 
-                if (isArray(a.validation)) {
+                if (Array.isArray(a.validation)) {
                     let validators = [];
                     a.validation.forEach(i => validators.push(setValidator(i)));
                     temp[a.key].push(Validators.compose(validators))
@@ -32,9 +31,9 @@ export class ControlGroupService {
         function setValidator(item) {
             switch (item.type) {
                 case 'required': return Validators.required;
-                case 'minLength': return Validators.minLength(item.content);
-                case 'maxLength': return Validators.maxLength(item.content);
-                case 'pattern': return Validators.pattern(item.content);
+                case 'minLength': return Validators.minLength(item.value);
+                case 'maxLength': return Validators.maxLength(item.value);
+                case 'pattern': return Validators.pattern(item.value);
             }
         }
     }

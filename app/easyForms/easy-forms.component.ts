@@ -1,16 +1,19 @@
 import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 import {ControlGroupService} from './control-group.service'
+import {QuestionComponent} from './question.component';
 
 @Component({
     selector: 'easy-forms',
+    providers: [ControlGroupService],
+    directives: [QuestionComponent],
     inputs: ['data'],
     outputs: ['onSubmit'],
     template: `
         <div>
             <form (ngSubmit)="submit()" [ngFormModel]="form">
-                <div *ngFor="let question of questions" class="form-row">
-                    <ef-question [question]="question" [form]="form"></ef-question>
+                <div *ngFor="let q of data.questions" class="form-row">
+                    <ef-question [question]="q" [form]="form"></ef-question>
                 </div>
                 <div class="form-row">
                     <input type="submit" [disabled]="!form.valid" [value]="data.buttonValue">
@@ -29,7 +32,7 @@ export class EasyFormsComponent {
 
     form: ControlGroup;
 
-    ngOnInit(){
+    ngOnInit() {
         this.form = this._controlGroup.create(this.data.questions);
     }
 
