@@ -1,6 +1,6 @@
-import {Component, EventEmitter} from '@angular/core';
-import {ControlGroup} from '@angular/common';
-import {ControlGroupService} from './control-group.service';
+import {Component, EventEmitter} from '@angular/core'
+import {ControlGroup} from '@angular/common'
+import {ControlGroupService} from './control-group.service'
 
 @Component({
     selector: 'easy-forms',
@@ -10,7 +10,7 @@ import {ControlGroupService} from './control-group.service';
         <div>
             <form (ngSubmit)="submit()" [ngFormModel]="form">
                 <div *ngFor="let question of questions" class="form-row">
-                    <df-question [question]="question" [form]="form"></df-question>
+                    <ef-question [question]="question" [form]="form"></ef-question>
                 </div>
                 <div class="form-row">
                     <input type="submit" [disabled]="!form.valid" [value]="data.buttonValue">
