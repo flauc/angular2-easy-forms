@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/common';
 
-function match(control1, control2) {
-    if (control1.value && control2.value && control1.value !== control2.value) return {match: false}
+function match(key) {
+    return (control) => {
+        if (control.value && control.root.controls) return control.root.controls[key].value !== control.value ? {'match': {'controlToMach': key,  'valueToMatch': control.root.controls[key].value}} : null;
+        return null;
+    };
 }
 
 @Injectable()
@@ -38,8 +41,10 @@ export class ControlGroupService {
                 case 'minLength': return Validators.minLength(item.value);
                 case 'maxLength': return Validators.maxLength(item.value);
                 case 'pattern': return Validators.pattern(item.value);
-                case 'custom': return item.value
+                case 'custom': return item.value;
+                case 'match': return match(item.value);
             }
         }
     }
 }
+

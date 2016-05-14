@@ -12,10 +12,10 @@ import {QuestionComponent} from './question.component';
     template: `
         <div>
             <form (ngSubmit)="submit()" [ngFormModel]="form">
-                <div *ngFor="let q of data.questions" class="form-row">
+                <div *ngFor="let q of data.questions" class="row">
                     <ef-question [question]="q" [form]="form"></ef-question>
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <input type="submit" [disabled]="!form.valid" [value]="data.buttonValue">
                 </div>
             </form>
