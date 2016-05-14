@@ -15,12 +15,14 @@ function startsWithNumber(control) {
     directives: [EasyFormsComponent],
     template: `
         <h1>Testing</h1>
-        <easy-forms [data]="data" (onSubmit)="onSubmit($event)"></easy-forms>
+        <easy-forms [data]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-forms>
     `
 })
 export class AppComponent {
     public data = {
-        buttonValue: 'Send',
+        settings: {
+            submitButtonText: 'Send',
+        },
         questions: [
             {
                 type: 'text',
@@ -42,21 +44,15 @@ export class AppComponent {
                     {type: 'required'},
                     {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
                 ]
-            },
-            {
-                type: 'text',
-                key: 'passwordMatch',
-                value: '12345',
-                label: 'Password',
-                validation: [
-                    {type: 'required'},
-                    {type: 'match', value: 'password', message: 'Please match with password'}
-                ]
             }
         ]
     };
 
     onSubmit(event) {
+        console.log(event)
+    }
+
+    onChanges(event) {
         console.log(event)
     }
 }

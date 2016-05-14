@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core'
+import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 
 @Component({
     selector: 'ef-question',
     inputs: ['question', 'form'],
+    outputs: ['valueChange'],
     template: `
         <div [ngFormModel]="form">
             <label [attr.for]="question.key">{{question.label}}</label>
@@ -13,7 +14,7 @@ import {ControlGroup} from '@angular/common'
                     *ngSwitchWhen="'text'"
                     [ngControl]="question.key"  
                     [type]="question.type"
-                    (ngModelChange)="test()"
+                    (ngModelChange)="onValueChange($event)"
                     [id]="question.key">
             </div>
             
@@ -26,12 +27,15 @@ import {ControlGroup} from '@angular/common'
 })
 
 export class QuestionComponent {
+    
     question: any;
     form: ControlGroup;
+    valueChange: EventEmitter = new EventEmitter();
+
     get isValid() { return this.form.controls[this.question.key].valid; }
 
-    test() {
-        console.log(this.form.controls[this.question.key]);
+    onValueChange(event) {
+        if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event})
     }
     
     errors() {

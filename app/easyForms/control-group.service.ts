@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/common';
 
 function match(key) {
     return (control) => {
-        if (control.value && control.root.controls) return control.root.controls[key].value !== control.value ? {'match': {'controlToMach': key,  'valueToMatch': control.root.controls[key].value}} : null;
+        if (control.value && control.root.controls) return control.root.controls[key].value !== control.value ? {'match': {'actualValue': key,  'requiredValue': control.root.controls[key].value}} : null;
         return null;
     };
 }
