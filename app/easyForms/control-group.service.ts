@@ -1,6 +1,10 @@
 import {Injectable} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/common';
 
+function match(control1, control2) {
+    if (control1.value && control2.value && control1.value !== control2.value) return {match: false}
+}
+
 @Injectable()
 export class ControlGroupService {
     constructor(
@@ -34,6 +38,7 @@ export class ControlGroupService {
                 case 'minLength': return Validators.minLength(item.value);
                 case 'maxLength': return Validators.maxLength(item.value);
                 case 'pattern': return Validators.pattern(item.value);
+                case 'custom': return item.value
             }
         }
     }
