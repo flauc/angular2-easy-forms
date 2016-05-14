@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 
 @Injectable()
 export class EasyFormSettings {
@@ -9,10 +9,12 @@ export class EasyFormSettings {
         }
     }
 
-    public globalSettings: any;
+    globalSettings: any;
+    emitter: EventEmitter = new EventEmitter();
 
     set(settings) {
-        this.globalSettings = settings;
+        for (let p in settings) this.globalSettings[p] = settings[p];
+        console.log(this.globalSettings);
+        this.emitter.emit(this.globalSettings)
     }
-
 }
