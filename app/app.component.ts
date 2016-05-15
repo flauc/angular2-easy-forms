@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {EasyFormsComponent} from './easyForms/easy-forms.component';
-import {EasyFormSettings} from './easyForms/easy-forms-settings.service';
 
 function startsWithNumber(control) {
 
@@ -21,11 +20,7 @@ function startsWithNumber(control) {
     `
 })
 export class AppComponent {
-    constructor(
-        private _formSettings: EasyFormSettings
-    ) {
-        _formSettings.set({submitButtonText: 'Pero'})
-    }
+    constructor() {}
 
     public data = {
         settings: {

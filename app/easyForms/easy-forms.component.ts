@@ -2,11 +2,11 @@ import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 import {ControlGroupService} from './control-group.service'
 import {QuestionComponent} from './question.component';
-import {EasyFormSettings} from './easy-forms-settings.service';
+
 
 @Component({
     selector: 'easy-forms',
-    providers: [ControlGroupService, EasyFormSettings],
+    providers: [ControlGroupService],
     directives: [QuestionComponent],
     inputs: ['data'],
     outputs: ['onSubmit', 'onChanges'],
@@ -16,8 +16,8 @@ import {EasyFormSettings} from './easy-forms-settings.service';
                 <div *ngFor="let q of data.questions" class="row">
                     <ef-question [question]="q" [form]="form" (valueChange)="onQuestionValueChange($event)"></ef-question>
                 </div>
-                <div class="row" *ngIf="settings.submitButton">
-                    <input type="submit" [disabled]="!form.valid" [value]="settings.submitButtonText">
+                <div class="row" *ngIf="data.settings.submitButton">
+                    <input type="submit" [disabled]="!form.valid" [value]="data.settings.submitButtonText">
                 </div>
             </form>
         </div>
@@ -25,8 +25,7 @@ import {EasyFormSettings} from './easy-forms-settings.service';
 })
 export class EasyFormsComponent {
     constructor(
-        private _controlGroup: ControlGroupService,
-        private _gs: EasyFormSettings
+        private _controlGroup: ControlGroupService
     ) {}
 
     // Input
@@ -37,16 +36,12 @@ export class EasyFormsComponent {
 
     form: ControlGroup;
 
-    settings: any = {};
-
     private listener: any;
 
     ngOnInit() {
         this.form = this._controlGroup.create(this.data.questions);
         // Add the settings object if it was not defined
         if (!this.data.settings) this.data.settings = {};
-        // Subscribe to the global settings emitter
-        this.listener = this._gs.emitter.subscribe(a => this.setSettings());
 
         this.setSettings();
     }
@@ -60,12 +55,13 @@ export class EasyFormsComponent {
     }
 
     setSettings() {
-        console.log(this._gs.globalSettings);
-        // Add global settings
-        for (let p in this._gs.globalSettings) {
-            if (!this.data.settings[p]) this.settings[p] = this._gs.globalSettings[p];
-            else this.settings[p] = this.data.settings[p]
-        }
+        let defaultSettings = {
+            submitButton: true,
+            submitButtonText: 'Submit'
+        };
+
+        // Add default settings
+        for (let p in defaultSettings) if (!this.data.settings[p]) this.data.settings[p] = defaultSettings[p];
     }
 
     ngOnDestroy() {
