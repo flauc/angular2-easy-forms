@@ -10,12 +10,20 @@ import {ControlGroup} from '@angular/common'
             <label [attr.for]="question.key">{{question.label}}</label>
             
             <div [ngSwitch]="question.type">
+                <select 
+                    *ngSwitchWhen="'dropdown'"
+                    [ngControl]="question.key"
+                    (ngModelChange)="onValueChange($event)"
+                    [id]="question.key">
+                    <option *ngFor="let o of question.options" [value]="o.value">{{o.name}}</option>
+                </select>   
+            
                 <input 
                     *ngSwitchDefault
                     [ngControl]="question.key"  
                     [type]="question.type"
                     (ngModelChange)="onValueChange($event)"
-                    [id]="question.key">
+                    [id]="question.key"> 
             </div>
             
             <div class="error-block" *ngIf="!isValid">

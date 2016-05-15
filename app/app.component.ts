@@ -45,6 +45,16 @@ export class AppComponent {
                     {type: 'required'},
                     {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
                 ]
+            },
+            {
+                type: 'dropdown',
+                key: 'address',
+                label: 'Address',
+                value: 'osijek',
+                options: [
+                    {value: 'osijek', name: 'Osijek'},
+                    {value: 'zagreb', name: 'Zagreb'}
+                ]
             }
         ]
     };
