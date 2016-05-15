@@ -18,6 +18,19 @@ import {ControlGroup} from '@angular/common'
                     <option *ngFor="let o of question.options" [value]="o.value">{{o.name}}</option>
                 </select>   
                 
+                <div *ngSwitchWhen="'checkbox'">
+                    <div class="checkbox" *ngFor="let o of question.options">
+                        <input 
+                            [type]="question.type"
+                            [ngControl]="question.key"
+                            [name]="question.key"
+                            [value]="o.value"
+                            [checked]="question.value === o.value"
+                            (click)="setRadio(o)">
+                        <span>{{o.name}}</span>   
+                    </div>
+                </div>
+                
                 <div *ngSwitchWhen="'radio'">
                     <div class="radio" *ngFor="let o of question.options">
                         <input 
