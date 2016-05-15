@@ -65,6 +65,17 @@ export class AppComponent {
                     {value: 'male', name: 'Male'},
                     {value: 'female', name: 'Female'}
                 ]
+            },
+            {
+                type: 'checkbox',
+                key: 'things',
+                label: 'Things You Like',
+                values: ['pokemon', 'starWars'],
+                options: [
+                    {value: 'starWars', name: 'Star Wars'},
+                    {value: 'batlefield', name: 'Batlefield'},
+                    {value: 'pokemon', name: 'Pokemon'}
+                ]
             }
         ]
     };

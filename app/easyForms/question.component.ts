@@ -15,7 +15,7 @@ import {ControlGroup} from '@angular/common'
                     [ngControl]="question.key"
                     (ngModelChange)="onValueChange($event)"
                     [id]="question.key">
-                    <option *ngFor="let o of question.options" [value]="o.value">{{o.name}}</option>
+                    <option *ngFor="let o of question.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
                 </select>   
                 
                 <div *ngSwitchWhen="'checkbox'">
@@ -25,9 +25,9 @@ import {ControlGroup} from '@angular/common'
                             [ngControl]="question.key"
                             [name]="question.key"
                             [value]="o.value"
-                            [checked]="question.value === o.value"
-                            (click)="setRadio(o)">
-                        <span>{{o.name}}</span>   
+                            [checked]="isSelectActive(o)"
+                            (click)="setCheckbox(o)">
+                        <span>{{o.name ? o.name : o.value}}</span>   
                     </div>
                 </div>
                 
@@ -40,7 +40,7 @@ import {ControlGroup} from '@angular/common'
                             [value]="o.value"
                             [checked]="question.value === o.value"
                             (click)="setRadio(o)">
-                        <span>{{o.name}}</span>    
+                        <span>{{o.name ? o.name : o.value}}</span>    
                     </div>
                 </div>
             
@@ -68,6 +68,10 @@ export class QuestionComponent {
 
     get isValid() { return this.form.controls[this.question.key].valid; }
 
+    ngOnInit() {
+        if (this.question.type === 'checkbox' && !this.question.values) this.question.values = [];
+    }
+
     onValueChange(event) {
         if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event})
     }
@@ -89,5 +93,18 @@ export class QuestionComponent {
     setRadio(option) {
         this.form.controls[this.question.key].updateValue(option.value);
         this.onValueChange(option.value)
+    }
+
+    setCheckbox(option) {
+        let index = this.question.values.indexOf(option.value);
+
+        if (index) this.question.values.splice(index, 1);
+        else this.question.values.push(option.value);
+
+        this.onValueChange(this.question.values)
+    }
+
+    isSelectActive(option) {
+        return this.question.values.find(a => a === option.value) ? true : false;
     }
 }
