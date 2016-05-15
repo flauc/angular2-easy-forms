@@ -17,6 +17,19 @@ import {ControlGroup} from '@angular/common'
                     [id]="question.key">
                     <option *ngFor="let o of question.options" [value]="o.value">{{o.name}}</option>
                 </select>   
+                
+                <div *ngSwitchWhen="'radio'">
+                    <div class="radio" *ngFor="let o of question.options">
+                        <input 
+                            [type]="question.type"
+                            [ngControl]="question.key"
+                            [name]="question.key"
+                            [value]="o.value"
+                            [checked]="question.value === o.value"
+                            (click)="setRadio(o)">
+                        <span>{{o.name}}</span>    
+                    </div>
+                </div>
             
                 <input 
                     *ngSwitchDefault
@@ -58,5 +71,10 @@ export class QuestionComponent {
         }
 
         else return this.question.validation.message;
+    }
+
+    setRadio(option) {
+        this.form.controls[this.question.key].updateValue(option.value);
+        this.onValueChange(option.value)
     }
 }

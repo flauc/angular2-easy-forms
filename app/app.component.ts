@@ -55,6 +55,16 @@ export class AppComponent {
                     {value: 'osijek', name: 'Osijek'},
                     {value: 'zagreb', name: 'Zagreb'}
                 ]
+            },
+            {
+                type: 'radio',
+                key: 'gender',
+                label: 'Gender',
+                value: 'male',
+                options: [
+                    {value: 'male', name: 'Male'},
+                    {value: 'female', name: 'Female'}
+                ]
             }
         ]
     };
