@@ -11,7 +11,7 @@ import {ControlGroup} from '@angular/common'
             
             <div [ngSwitch]="question.type">
                 <input 
-                    *ngSwitchWhen="'text'"
+                    *ngSwitchDefault
                     [ngControl]="question.key"  
                     [type]="question.type"
                     (ngModelChange)="onValueChange($event)"

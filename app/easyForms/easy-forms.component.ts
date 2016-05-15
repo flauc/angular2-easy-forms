@@ -36,8 +36,6 @@ export class EasyFormsComponent {
 
     form: ControlGroup;
 
-    private listener: any;
-
     ngOnInit() {
         this.form = this._controlGroup.create(this.data.questions);
         // Add the settings object if it was not defined
@@ -62,9 +60,5 @@ export class EasyFormsComponent {
 
         // Add default settings
         for (let p in defaultSettings) if (!this.data.settings[p]) this.data.settings[p] = defaultSettings[p];
-    }
-
-    ngOnDestroy() {
-        if (this.listener) this.listener.unsubscribe();
     }
 }

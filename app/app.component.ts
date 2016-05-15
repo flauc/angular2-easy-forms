@@ -16,7 +16,6 @@ function startsWithNumber(control) {
     template: `
         <h1>Testing</h1>
         <easy-forms [data]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-forms>
-        <easy-forms [data]="data2"></easy-forms>
     `
 })
 export class AppComponent {
@@ -29,46 +28,19 @@ export class AppComponent {
         questions: [
             {
                 type: 'text',
-                key: 'test',
-                value: 'nesto',
-                label: 'Proba',
+                key: 'firstName',
+                value: 'John Doe',
+                label: 'First Name',
                 validation: [
                     {type: 'required'},
-                    {type: 'minLength', value: 10, message: 'Please enter a value larger then 10'},
-                    {type: 'pattern', value: '^[a-zA-Z ]+$', message: 'You are stupid'}
+                    {type: 'minLength', value: 5, message: 'Please enter a name longer then 5 characters'},
+                    {type: 'pattern', value: '^[a-zA-Z ]+$', message: 'Only letters and spaces are allowed'}
                 ]
             },
             {
-                type: 'text',
+                type: 'password',
                 key: 'password',
-                value: '123',
                 label: 'Password',
-                validation: [
-                    {type: 'required'},
-                    {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
-                ]
-            }
-        ]
-    };
-
-    public data2 = {
-        questions: [
-            {
-                type: 'text',
-                key: 'test',
-                value: 'nesto',
-                label: 'Prob32a',
-                validation: [
-                    {type: 'required'},
-                    {type: 'minLength', value: 10, message: 'Please enter a value larger then 10'},
-                    {type: 'pattern', value: '^[a-zA-Z ]+$', message: 'You are stupid'}
-                ]
-            },
-            {
-                type: 'text',
-                key: 'password',
-                value: '123',
-                label: 'Passwo23rd',
                 validation: [
                     {type: 'required'},
                     {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
