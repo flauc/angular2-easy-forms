@@ -1,6 +1,7 @@
 {
   "name": "angular2-easy-forms",
   "version": "0.0.1",
+  "description": "An Angular 2 library for simplification of form creation and validation.",
   "scripts": {
     "lite": "lite-server",
     "postinstall": "typings install"
