@@ -98,9 +98,10 @@ export class QuestionComponent {
     setCheckbox(option) {
         let index = this.question.values.indexOf(option.value);
 
-        if (index) this.question.values.splice(index, 1);
+        if (index !== -1) this.question.values.splice(index, 1);
         else this.question.values.push(option.value);
 
+        this.form.controls[this.question.key].updateValue(this.question.values);
         this.onValueChange(this.question.values)
     }
 
