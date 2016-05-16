@@ -31,6 +31,7 @@ export class AppComponent {
                 key: 'firstName',
                 value: 'John Doe',
                 label: 'First Name',
+                order: 6,
                 validation: [
                     {type: 'required'},
                     {type: 'minLength', value: 5, message: 'Please enter a name longer then 5 characters'},
@@ -41,6 +42,7 @@ export class AppComponent {
                 type: 'password',
                 key: 'password',
                 label: 'Password',
+                order: 4,
                 validation: [
                     {type: 'required'},
                     {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
@@ -51,6 +53,7 @@ export class AppComponent {
                 key: 'address',
                 label: 'Address',
                 value: 'osijek',
+                order: 2,
                 options: [
                     {value: 'osijek', name: 'Osijek'},
                     {value: 'zagreb', name: 'Zagreb'}
@@ -61,6 +64,7 @@ export class AppComponent {
                 key: 'gender',
                 label: 'Gender',
                 value: 'male',
+                order: 3,
                 options: [
                     {value: 'male', name: 'Male'},
                     {value: 'female', name: 'Female'}
@@ -70,6 +74,7 @@ export class AppComponent {
                 type: 'checkbox',
                 key: 'things',
                 label: 'Things You Like',
+                order: 1,
                 values: ['pokemon', 'starWars'],
                 options: [
                     {value: 'starWars', name: 'Star Wars'},

@@ -37,6 +37,7 @@ export class EasyFormsComponent {
     form: ControlGroup;
 
     ngOnInit() {
+        this.sortQuestions();
         this.form = this._controlGroup.create(this.data.questions);
         // Add the settings object if it was not defined
         if (!this.data.settings) this.data.settings = {};
@@ -60,5 +61,9 @@ export class EasyFormsComponent {
 
         // Add default settings
         for (let p in defaultSettings) if (!this.data.settings[p]) this.data.settings[p] = defaultSettings[p];
+    }
+
+    sortQuestions() {
+        this.data.questions.sort((a, b) =>  a.order - b.order);
     }
 }
