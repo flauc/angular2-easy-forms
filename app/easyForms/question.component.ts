@@ -26,6 +26,8 @@ import {ControlGroup} from '@angular/common'
                             [name]="question.key"
                             [value]="o.value"
                             [checked]="isSelectActive(o)"
+                            (change)="chackboxValueChange()"
+                            [disabled]="o.disabled"
                             (click)="setCheckbox(o)">
                         <span>{{o.name ? o.name : o.value}}</span>   
                     </div>
@@ -68,8 +70,13 @@ export class QuestionComponent {
 
     get isValid() { return this.form.controls[this.question.key].valid; }
 
+    private checkboxIsRequired: boolean = false;
+
     ngOnInit() {
-        if (this.question.type === 'checkbox' && !this.question.values) this.question.values = [];
+        if (this.question.type === 'checkbox') {
+            if (!this.question.values) this.question.values = [];
+            if (this.question.validation && this.question.validation.find(a => a.type === 'required')) this.checkboxIsRequired = true;
+        }
     }
 
     onValueChange(event) {
@@ -103,6 +110,11 @@ export class QuestionComponent {
 
         this.form.controls[this.question.key].updateValue(this.question.values);
         this.onValueChange(this.question.values)
+    }
+
+    chackboxValueChange() {
+        if (this.question.values.length === 1) this.question.options.find(a => a.value === this.question.values[0]).disabled = true;
+        else this.question.options.forEach(a => a.disabled = false)
     }
 
     isSelectActive(option) {

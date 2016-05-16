@@ -80,6 +80,9 @@ export class AppComponent {
                     {value: 'starWars', name: 'Star Wars'},
                     {value: 'batlefield', name: 'Batlefield'},
                     {value: 'pokemon', name: 'Pokemon'}
+                ],
+                validation: [
+                    {type: 'required'}
                 ]
             }
         ]
