@@ -92,6 +92,7 @@ export class QuestionComponent {
             let temp = [];
 
             this.question.validation.forEach(a => {
+                if (a.type === 'required' && !a.message) temp.push(`${this.question.label || this.question.key} is required`);
                 if (this.form.controls[this.question.key].hasError(a.type.toLowerCase())) temp.push(a.message);
             });
 

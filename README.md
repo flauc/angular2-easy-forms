@@ -46,6 +46,11 @@ value | string (if question `type: 'checkbox'` then its an array) | false | An i
 order | int | false | Define a specific order for the questions (if one question has an order property to achieve the required effect)
 validation | object | false | Read more about validation [here](#validation)
 
+If you define the type of question to be `radio`, `checkbox` or `dropdown` then you need to define an additional property:
+
+property | type | required | description 
+------------ | ------------- | ------------- | ------------- |
+options | object array `{value: string, name: string}` | true | Define an array of options for the question
 
 ## Validation
 
