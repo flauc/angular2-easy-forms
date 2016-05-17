@@ -31,7 +31,7 @@ Import it in the component where you want to use it.
 import {EasyFormsComponent} from 'easy-forms'
 ```
 
-They you define a list of questions as well as a settings object if required and pass it to the component.
+Then you define a list of questions as well as a settings object if required and pass it to the component.
 ```typescript
 @Component({
     selector: 'app',
