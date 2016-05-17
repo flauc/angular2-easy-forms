@@ -7,7 +7,11 @@ import {ControlGroup} from '@angular/common'
     outputs: ['valueChange'],
     template: `
         <div [ngFormModel]="form">
-            <label [attr.for]="question.key">{{question.label}}</label>
+            <label 
+                *ngIf="question.label" 
+                [attr.for]="question.key">
+                {{question.label}}
+            </label>
             
             <div [ngSwitch]="question.type">
                 <select 

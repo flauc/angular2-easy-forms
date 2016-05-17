@@ -23,14 +23,29 @@ You also need to declare the library in your system.js config.
 ```js
 ```
 
-And import it in the component where you want to use it. 
+Import it in the component where you want to use it. 
 
+```typescript
+```
+
+They you define a list of questions as well as an options object if required and pass it to the component.
 ```typescript
 ```
 
 You can find an example of the setup in the example folder.
 
 ## Questions
+Each question can have the following properties: 
+
+property | type | required | description 
+------------ | ------------- | ------------- | ------------- |
+type | text, password, number, dropdown (select), radio or checkbox | true | Defines the type of the question
+key | string | true | Defines the key of the control, this is the key of the value that gets emitted [onSubmit](#events) and [onChange](#events) 
+label | string | false | The label of the form input
+value | string (if question `type: 'checkbox'` then its an array) | false | An initial value for the question
+order | int | false | Define a specific order for the questions (if one question has an order property to achieve the required effect)
+validation | object | false | Read more about validation [here](#validation)
+
 
 ## Validation
 
@@ -48,7 +63,9 @@ This is how you bind to them:
 The onSubmit event emits when the submit button is pressed. The emitted object contains all of the forms questions with their corresponding values `obj[key] = value`. 
 If the questions type is 'checkbox' the emitted value is an array of all the checked
 
-### OnSubmit
+### OnChange
+The onChange event emits when ever a value changes. The following is what gets emitted: `{[key]: value}`.
+You can disable a question from triggering the onChange event by setting the `emitChanges` property to `false`.
 
 ## Options
 
