@@ -1,6 +1,8 @@
 .idea
 node_modules
-typings
+example/node_modules
+example/typings
 example/app/**/**.js
 example/app/**/**.js.map
 lib
+.npmignore
