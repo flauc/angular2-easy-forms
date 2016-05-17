@@ -1,8 +1,0 @@
-example
-node_modules
-.idea
-.npmignore
-.gitignore
-tsconfig.json
-README.md
-tslint.json
