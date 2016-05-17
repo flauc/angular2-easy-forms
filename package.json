@@ -1,12 +1,28 @@
 {
   "name": "angular2-easy-forms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Angular 2 library for simplification of form creation and validation.",
   "license": "MIT",
+  "author": "filip.lauc93@gmail.com",
+  "bugs": {
+    "url": "https://github.com/flauc/angular2-easy-forms/issues"
+  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
     "@angular/core": "2.0.0-rc.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flauc/angular2-easy-forms.git"
+  },
+  "keywords": [
+    "Angular 2",
+    "Angular",
+    "ng2",
+    "Library",
+    "Form",
+    "Easy Form"
+  ],
   "devDependencies": {
     "typescript": "^1.8.10",
     "typings":"^0.8.1"
