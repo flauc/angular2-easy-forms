@@ -6,12 +6,14 @@
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
+    "removeComments": true,
+    "outDir": "./lib",
+    "noImplicitAny": false,
+    "declaration": true
   },
-  "exclude": [
-    "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+  "files": [
+    "src/control-group.service.ts",
+    "src/easy-forms.component.ts",
+    "src/question.component.ts"
   ]
 }

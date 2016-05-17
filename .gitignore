@@ -1,5 +1,6 @@
 .idea
 node_modules
 typings
-app/**/**.js
-app/**/**.js.map
+example/app/**/**.js
+example/app/**/**.js.map
+lib

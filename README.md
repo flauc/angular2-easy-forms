@@ -30,7 +30,25 @@ And import it in the component where you want to use it.
 
 You can find an example of the setup in the example folder.
 
-## Question Properties
+## Questions
+
+## Validation
+
+## Events
+There are two events you can bind to: 
+* onSubmit
+* onChange
+
+This is how you bind to them: 
+```html
+<easy-forms [data]="data" (onSubmit)="fuFunction($event)" (onChanges)="barFunction($event)"></easy-forms>
+```
+
+### onSubmit
+The onSubmit event emits when the submit button is pressed. The emitted object contains all of the forms questions with their corresponding values `obj[key] = value`. 
+If the questions type is 'checkbox' the emitted value is an array of all the checked
+
+### OnSubmit
 
 ## Options
 
