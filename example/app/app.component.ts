@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {EasyFormsComponent} from 'easy-forms';
+import {Component} from '@angular/core'
+import {EasyFormsComponent} from 'easy-forms'
 
 function startsWithNumber(control) {
 
@@ -71,7 +71,6 @@ export class AppComponent {
                 type: 'checkbox',
                 key: 'things',
                 label: 'Things You Like',
-                values: ['pokemon', 'starWars'],
                 options: [
                     {value: 'starWars', name: 'Star Wars'},
                     {value: 'batlefield', name: 'Batlefield'},
