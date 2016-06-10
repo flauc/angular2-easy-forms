@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/common';
+import {Injectable} from '@angular/core'
+import {FormBuilder, Validators} from '@angular/common'
 
 function match(key) {
     return (control) => {
@@ -14,7 +14,7 @@ export class ControlGroupService {
         private fb: FormBuilder
     ) {}
 
-    create(questions) {
+    create(questions): FormBuilder {
         let temp = {};
 
         questions.forEach(a => {

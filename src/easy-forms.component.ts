@@ -1,7 +1,7 @@
 import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 import {ControlGroupService} from './control-group.service'
-import {QuestionComponent} from './question.component';
+import {QuestionComponent} from './question.component'
 
 
 @Component({
