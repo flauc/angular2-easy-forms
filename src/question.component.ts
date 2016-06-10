@@ -6,9 +6,10 @@ import {ControlGroup} from '@angular/common'
     inputs: ['question', 'form'],
     outputs: ['valueChange'],
     template: `
-        <div [ngFormModel]="form">
+        <div [ngFormModel]="form" [ngClass]="question.classes?.wrapper">
             <label 
                 *ngIf="question.label" 
+                [ngClass]="question.classes?.label"
                 [attr.for]="question.key">
                 {{question.label}}
             </label>
@@ -22,7 +23,7 @@ import {ControlGroup} from '@angular/common'
                     <option *ngFor="let o of question.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
                 </select>   
                 
-                <div *ngSwitchWhen="'checkbox'">
+                <div *ngSwitchWhen="'checkbox'" [ngClass]="question.classes?.question">
                     <div class="checkbox" *ngFor="let o of question.options">
                         <input 
                             [type]="question.type"
@@ -37,7 +38,7 @@ import {ControlGroup} from '@angular/common'
                     </div>
                 </div>
                 
-                <div *ngSwitchWhen="'radio'">
+                <div *ngSwitchWhen="'radio'" [ngClass]="question.classes?.question">
                     <div class="radio" *ngFor="let o of question.options">
                         <input 
                             [type]="question.type"
@@ -55,10 +56,11 @@ import {ControlGroup} from '@angular/common'
                     [ngControl]="question.key"  
                     [type]="question.type"
                     (ngModelChange)="onValueChange($event)"
+                    [ngClass]="question.classes?.question"
                     [id]="question.key"> 
             </div>
             
-            <div class="error-block" *ngIf="!isValid">
+            <div class="error-block" *ngIf="!isValid" [ngClass]="question.classes?.error">
                 <span *ngFor="let e of errors()">{{e}}</span>
             </div>
         </div>

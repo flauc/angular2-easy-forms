@@ -12,11 +12,9 @@ import {QuestionComponent} from './question.component'
     outputs: ['onSubmit', 'onChanges'],
     template: `
         <div>
-            <form (ngSubmit)="submit()" [ngFormModel]="form">
-                <div *ngFor="let q of data.questions" class="row">
-                    <ef-question [question]="q" [form]="form" (valueChange)="onQuestionValueChange($event)"></ef-question>
-                </div>
-                <div class="row" *ngIf="data.settings.submitButton">
+            <form (ngSubmit)="submit()" [ngFormModel]="form" [ngClass]="data.classes?.form">
+                <ef-question *ngFor="let q of data.questions"  [question]="q" [form]="form" (valueChange)="onQuestionValueChange($event)"></ef-question>
+                <div *ngIf="data.settings.submitButton" [ngClass]="data.classes?.input">
                     <input type="submit" [disabled]="!form.valid" [value]="data.settings.submitButtonText">
                 </div>
             </form>
@@ -41,7 +39,9 @@ export class EasyFormsComponent {
         this.form = this._controlGroup.create(this.data.questions);
         // Add the settings object if it was not defined
         if (!this.data.settings) this.data.settings = {};
-
+        // // Add the classes object if it was not defined
+        // if (!this.data.classes) this.data.classes = {};
+        
         this.setSettings();
     }
 
@@ -59,8 +59,20 @@ export class EasyFormsComponent {
             submitButtonText: 'Submit'
         };
 
+        // let defaultClasses = {
+        //     form: [],
+        //     input: []
+        // };
+
         // Add default settings
-        for (let p in defaultSettings) if (!this.data.settings[p]) this.data.settings[p] = defaultSettings[p];
+        for (let p in defaultSettings)
+            if (!this.data.settings[p])
+                this.data.settings[p] = defaultSettings[p];
+        
+        // // Add default classes 
+        // for (let p in defaultClasses)
+        //     if (!this.data.classes[p])
+        //         this.data.classes[p] = defaultClasses[p];
     }
 
     sortQuestions() {
