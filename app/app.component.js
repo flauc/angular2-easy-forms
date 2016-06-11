@@ -52,7 +52,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                                 },
                                 validation: [
                                     { type: 'required' },
-                                    { type: 'match', value: 'password', message: "Password don't match" }
+                                    { type: 'match', value: 'password', message: "Passwords don't match" }
                                 ]
                             },
                         ]
@@ -140,7 +140,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                     core_1.Component({
                         selector: 'app',
                         directives: [easy_forms_1.EasyFormsComponent],
-                        template: "\n        <div class=\"container\">\n            <h1>Easy Forms Examples</h1>\n    \n            <h4>Matching Passwords</h4>\n            <easy-form [easyFormData]=\"formOne\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n        </div>\n    "
+                        template: "\n        <div class=\"container\">\n            <h1>Easy Forms Examples</h1> \n            <div class=\"block\">\n                <span class=\"title\">Matching Validator</span> \n                <easy-form [easyFormData]=\"formOne\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n            </div>\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

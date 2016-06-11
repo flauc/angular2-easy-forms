@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
@@ -10,7 +13,7 @@ h4 {
   position: relative;
   width: 100%;
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
@@ -60,4 +63,37 @@ input[type="password"]:focus {
 label {
   margin-bottom: 5px;
   display: block;
+}
+.error-block {
+  width: 100%;
+  float: left;
+}
+.error-block span {
+  width: 100%;
+  float: left;
+  padding: 0 7px;
+  color: #ef5350;
+}
+.submit input[type="submit"] {
+  padding: 10px 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 1px solid #666;
+  color: #666;
+}
+.block {
+  width: 96%;
+  float: left;
+  margin-right: 2%;
+  border: 1px solid #666;
+  position: relative;
+  padding: 20px;
+}
+.block .title {
+  position: absolute;
+  background: #fff;
+  font-size: 20px;
+  left: 50px;
+  top: -20px;
+  padding: 0 20px;
 }

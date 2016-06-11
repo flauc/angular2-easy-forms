@@ -1,3 +1,6 @@
+*
+  box-sizing border-box
+
 body
   margin 0
   font-family 'Roboto', sans-serif
@@ -6,11 +9,13 @@ h1
 h4
   font-weight 400
 
+
+
 .container
   position relative
   width 100%
   max-width 1170px
-  margin 0 auto
+  margin 50px auto
   padding 0 20px
   box-sizing border-box
   &:after
@@ -77,3 +82,18 @@ label
     text-transform uppercase
     border 1px solid #666
     color #666
+
+.block
+  width 96%
+  float left
+  margin-right 2%
+  border 1px solid #666
+  position relative
+  padding 20px
+  .title
+    position absolute
+    background #fff
+    font-size 20px
+    left 50px
+    top -20px
+    padding 0 20px

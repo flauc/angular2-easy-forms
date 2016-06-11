@@ -7,10 +7,11 @@ import {EasyFormsComponent} from 'easy-forms'
     directives: [EasyFormsComponent],
     template: `
         <div class="container">
-            <h1>Easy Forms Examples</h1>
-    
-            <h4>Matching Passwords</h4>
-            <easy-form [easyFormData]="formOne" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
+            <h1>Easy Forms Examples</h1> 
+            <div class="block">
+                <span class="title">Matching Validator</span> 
+                <easy-form [easyFormData]="formOne" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
+            </div>
         </div>
     `
 })
@@ -43,7 +44,7 @@ export class AppComponent {
                 },
                 validation: [
                     {type: 'required'},
-                    {type: 'match', value: 'password', message: `Password don't match`}
+                    {type: 'match', value: 'password', message: `Passwords don't match`}
                 ]
             },
         ]
