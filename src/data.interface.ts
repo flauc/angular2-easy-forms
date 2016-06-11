@@ -24,6 +24,8 @@ export interface Question {
 export interface Settings {
     submitButton: boolean
     submitButtonText: string
+    singleErrorMessage: boolean
+    errorOnDirty: boolean
 }
 
 export interface Classes {

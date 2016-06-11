@@ -62,7 +62,7 @@ import {Question} from './data.interface'
                     [id]="question.key"> 
             </div>
             
-            <div class="error-block" *ngIf="!isValid" [ngClass]="question.classes?.error">
+            <div class="error-block" [hidden]="isValid" [ngClass]="question.classes?.error">
                 <span *ngFor="let e of errors()">{{e}}</span>
             </div>
         </div>
@@ -80,6 +80,7 @@ export class QuestionComponent {
     set info(value) {
         this.question = value.question;
         this.form = value.form;
+        this.settings = value.settings;
 
         if (this.question.type === 'checkbox') {
             if (!this.question.value) this.question.value = [];
@@ -89,9 +90,10 @@ export class QuestionComponent {
     
     question: Question;
     form: ControlGroup;
+    settings: any;
     valueChange: EventEmitter = new EventEmitter();
 
-    get isValid() { return this.form.controls[this.question.key].valid; }
+    get isValid() { return this.form.controls[this.question.key].valid }
 
     private checkboxIsRequired: boolean = false;
 

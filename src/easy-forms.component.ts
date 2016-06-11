@@ -36,7 +36,14 @@ export class EasyFormsComponent {
         this._form = cg.fbGroup;
         this._matches = cg.matches;
         this.setSettings();
-        this.comp = {data: this._data, form: this._form};
+        this.comp = {
+            data: this._data, 
+            form: this._form, 
+            settings: {
+                singleErrorMessage: this._data.settings.singleErrorMessage,
+                errorOnDirty: this._data.settings.errorOnDirty
+            }
+        };
     }
     
     public comp: any;
@@ -69,7 +76,9 @@ export class EasyFormsComponent {
     setSettings() {
         let defaultSettings = {
             submitButton: true,
-            submitButtonText: 'Submit'
+            submitButtonText: 'Submit',
+            singleErrorMessage: true,
+            errorOnDirty: true
         };
     
         if (this._data.settings) {
