@@ -6,12 +6,43 @@ import {EasyFormsComponent} from 'easy-forms'
     selector: 'app',
     directives: [EasyFormsComponent],
     template: `
-        <h1>Easy Forms Example</h1>
-        <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
+        <h1>Easy Forms Examples</h1>
+        
+        <h4>Matching Passwords</h4>
+        <easy-form [easyFormData]="formOne" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
     `
 })
 export class AppComponent {
     constructor() {}
+    
+    public formOne = {
+        questions: [
+            {
+                type: 'password',
+                key: 'password',
+                label: 'Password',
+                classes: {
+                    'wrapper': 'half'
+                },
+                validation: [
+                    {type: 'required'},
+                    {type: 'minLength', value: 5, message: 'Password must be longer then 5 characters'},
+                ]
+            },
+            {
+                type: 'password',
+                key: 'passwordConf',
+                label: 'Confirm Password',
+                classes: {
+                    'wrapper': 'half'
+                },
+                validation: [
+                    {type: 'required'},
+                    {type: 'match', value: 'password', message: `Password don't match`}
+                ]
+            },
+        ]
+    };
 
     public data = {
         settings: {

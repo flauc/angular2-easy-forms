@@ -26,6 +26,34 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.formOne = {
+                        questions: [
+                            {
+                                type: 'password',
+                                key: 'password',
+                                label: 'Password',
+                                classes: {
+                                    'wrapper': 'half'
+                                },
+                                validation: [
+                                    { type: 'required' },
+                                    { type: 'minLength', value: 5, message: 'Password must be longer then 5 characters' },
+                                ]
+                            },
+                            {
+                                type: 'password',
+                                key: 'passwordConf',
+                                label: 'Confirm Password',
+                                classes: {
+                                    'wrapper': 'half'
+                                },
+                                validation: [
+                                    { type: 'required' },
+                                    { type: 'match', value: 'password', message: "Password don't match" }
+                                ]
+                            },
+                        ]
+                    };
                     this.data = {
                         settings: {
                             submitButtonText: 'Send',
@@ -109,7 +137,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                     core_1.Component({
                         selector: 'app',
                         directives: [easy_forms_1.EasyFormsComponent],
-                        template: "\n        <h1>Easy Forms Example</h1>\n        <easy-form [easyFormData]=\"data\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n    "
+                        template: "\n        <h1>Easy Forms Examples</h1>\n        \n        <h4>Matching Passwords</h4>\n        <easy-form [easyFormData]=\"formOne\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

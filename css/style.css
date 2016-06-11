@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  font-family: 'Droid Sans Mono';
+}
+.half {
+  width: 49%;
+  float: left;
+  margin-right: 2%;
+}
+.half:nth-child(2n) {
+  margin-right: 0;
+}
+h1 {
+  text-align: center;
+}
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus {
+  border: 1px solid #009688;
+  outline: 0;
+  width: 100%;
+}
+label {
+  margin-bottom: 5px;
+  display: block;
+}
