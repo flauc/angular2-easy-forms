@@ -13,7 +13,7 @@ export interface Question {
     emitChanges?: boolean
     options?: Array<{value: string | number, name: string, disabled: boolean}>
     classes?: {
-        wrapper?: string | Array<string>
+        wrapper?: string 
         label?: string | Array<string>
         question?: string | Array<string>
         error?: string | Array<string>

@@ -23,7 +23,7 @@
     "@angular/platform-browser": "2.0.0-rc.1",
     "@angular/platform-browser-dynamic": "2.0.0-rc.1",
     "@angular/upgrade": "2.0.0-rc.1",
-    "angular2-easy-forms": "0.0.3",
+    "angular2-easy-forms": "0.0.4",
     "es6-shim": "^0.35.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",

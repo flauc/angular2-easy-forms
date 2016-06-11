@@ -1,4 +1,4 @@
-import {Component, EventEmitter} from '@angular/core'
+import {Component, EventEmitter, HostBinding} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 import {Question} from './data.interface'
 
@@ -7,7 +7,7 @@ import {Question} from './data.interface'
     inputs: ['info'],
     outputs: ['valueChange'],
     template: `
-        <div [ngFormModel]="form" [ngClass]="question.classes?.wrapper">
+        <div [ngFormModel]="form">
             <label 
                 *ngIf="question.label" 
                 [ngClass]="question.classes?.label"
@@ -71,6 +71,11 @@ import {Question} from './data.interface'
 })
 
 export class QuestionComponent {
+
+    // Add class to the wrapper
+    @HostBinding('class') get toSet() {
+        return this.question && this.question.classes && this.question.classes.wrapper ? this.question.classes.wrapper : '';
+    }
 
     set info(value) {
         this.question = value.question;
