@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core'
 import {FormBuilder, Validators} from '@angular/common'
+import {Question, Validation} from './data.interface'
 
 function match(key) {
     return (control) => {
@@ -15,7 +16,7 @@ export class ControlGroupService {
         private fb: FormBuilder
     ) {}
 
-    create(questions): FormBuilder {
+    create(questions: Question[]): FormBuilder {
         let temp = {};
 
         questions.forEach(a => {
@@ -36,7 +37,7 @@ export class ControlGroupService {
 
         return this.fb.group(temp);
 
-        function setValidator(item) {
+        function setValidator(item: Validation) {
             switch (item.type) {
                 case 'required': return Validators.required;
                 case 'minLength': return Validators.minLength(item.value);

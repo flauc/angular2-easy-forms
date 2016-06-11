@@ -2,20 +2,21 @@ import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 import {ControlGroupService} from './control-group.service'
 import {QuestionComponent} from './question.component'
+import {EasyFormData} from './data.interface'
 
 
 @Component({
-    selector: 'easy-forms',
+    selector: 'easy-form',
     providers: [ControlGroupService],
     directives: [QuestionComponent],
-    inputs: ['data'],
+    inputs: ['easyFormData'],
     outputs: ['onSubmit', 'onChanges'],
     template: `
         <div>
-            <form (ngSubmit)="submit()" [ngFormModel]="form" [ngClass]="data.classes?.form">
-                <ef-question *ngFor="let q of data.questions"  [question]="q" [form]="form" (valueChange)="onQuestionValueChange($event)"></ef-question>
-                <div *ngIf="data.settings.submitButton" [ngClass]="data.classes?.input">
-                    <input type="submit" [disabled]="!form.valid" [value]="data.settings.submitButtonText">
+            <form (ngSubmit)="submit()" [ngFormModel]="comp.form" [ngClass]="comp.data.classes?.form">
+                <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form}" (valueChange)="onQuestionValueChange($event)"></ef-question>
+                <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.input">
+                    <input type="submit" [disabled]="!comp.form.valid" [value]="comp.data.settings.submitButtonText">
                 </div>
             </form>
         </div>
@@ -27,55 +28,41 @@ export class EasyFormsComponent {
     ) {}
 
     // Input
-    data: any;
+    set easyFormData(value: EasyFormData) {
+        this._data = value;
+        this.sortQuestions();
+        this._form = this._controlGroup.create(this._data.questions);
+        this.setSettings();
+        this.comp = {data: this._data, form: this._form};
+    }
+    
+    public comp: any;
+    
     // Outputs
     onSubmit: EventEmitter = new EventEmitter();
     onChanges: EventEmitter = new EventEmitter();
 
-    form: ControlGroup;
+    private _data: EasyFormData;
+    private _form: ControlGroup;
+    
 
-    ngOnInit() {
-        this.sortQuestions();
-        this.form = this._controlGroup.create(this.data.questions);
-        // Add the settings object if it was not defined
-        if (!this.data.settings) this.data.settings = {};
-        // // Add the classes object if it was not defined
-        // if (!this.data.classes) this.data.classes = {};
-        
-        this.setSettings();
-    }
-
-    submit() {
-        this.onSubmit.emit(this.form.value)
-    }
-
-    onQuestionValueChange(event) {
-        this.onChanges.emit(event)
-    }
-
+    submit() { this.onSubmit.emit(this._form.value) }
+    onQuestionValueChange(event) { this.onChanges.emit(event) }
+    sortQuestions() { this._data.questions.sort((a, b) =>  a.order - b.order) }
+    
     setSettings() {
         let defaultSettings = {
             submitButton: true,
             submitButtonText: 'Submit'
         };
-
-        // let defaultClasses = {
-        //     form: [],
-        //     input: []
-        // };
-
-        // Add default settings
-        for (let p in defaultSettings)
-            if (!this.data.settings[p])
-                this.data.settings[p] = defaultSettings[p];
+    
+        if (this._data.settings) {
+            // Add default settings
+            for (let p in defaultSettings)
+                if (!this._data.settings[p])
+                    this._data.settings[p] = defaultSettings[p];   
+        }
         
-        // // Add default classes 
-        // for (let p in defaultClasses)
-        //     if (!this.data.classes[p])
-        //         this.data.classes[p] = defaultClasses[p];
-    }
-
-    sortQuestions() {
-        this.data.questions.sort((a, b) =>  a.order - b.order);
+        else this._data.settings = defaultSettings;
     }
 }

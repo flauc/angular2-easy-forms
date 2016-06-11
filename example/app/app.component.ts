@@ -15,7 +15,7 @@ function startsWithNumber(control) {
     directives: [EasyFormsComponent],
     template: `
         <h1>Testing</h1>
-        <easy-forms [data]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-forms>
+        <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
     `
 })
 export class AppComponent {
@@ -71,6 +71,7 @@ export class AppComponent {
                 type: 'checkbox',
                 key: 'things',
                 label: 'Things You Like',
+                value: ['starWars', 'batlefield'],
                 options: [
                     {value: 'starWars', name: 'Star Wars'},
                     {value: 'batlefield', name: 'Batlefield'},

@@ -1,9 +1,10 @@
 import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
+import {Question} from './data.interface'
 
 @Component({
     selector: 'ef-question',
-    inputs: ['question', 'form'],
+    inputs: ['info'],
     outputs: ['valueChange'],
     template: `
         <div [ngFormModel]="form" [ngClass]="question.classes?.wrapper">
@@ -20,6 +21,7 @@ import {ControlGroup} from '@angular/common'
                     [ngControl]="question.key"
                     (ngModelChange)="onValueChange($event)"
                     [id]="question.key">
+                    [ngClass]="question.classes?.question"
                     <option *ngFor="let o of question.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
                 </select>   
                 
@@ -69,8 +71,18 @@ import {ControlGroup} from '@angular/common'
 })
 
 export class QuestionComponent {
+
+    set info(value) {
+        this.question = value.question;
+        this.form = value.form;
+
+        if (this.question.type === 'checkbox') {
+            if (!this.question.value) this.question.value = [];
+            if (this.question.validation && this.question.validation.find(a => a.type === 'required')) this.checkboxIsRequired = true;
+        }
+    }
     
-    question: any;
+    question: Question;
     form: ControlGroup;
     valueChange: EventEmitter = new EventEmitter();
 
@@ -78,16 +90,6 @@ export class QuestionComponent {
 
     private checkboxIsRequired: boolean = false;
 
-    ngOnInit() {
-        if (this.question.type === 'checkbox') {
-            if (!this.question.values) this.question.values = [];
-            if (this.question.validation && this.question.validation.find(a => a.type === 'required')) this.checkboxIsRequired = true;
-        }
-    }
-
-    onValueChange(event) {
-        if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event})
-    }
     
     errors() {
         if (Array.isArray(this.question.validation)) {
@@ -110,21 +112,20 @@ export class QuestionComponent {
     }
 
     setCheckbox(option) {
-        let index = this.question.values.indexOf(option.value);
+        let index = this.question.value.indexOf(option.value);
 
-        if (index !== -1) this.question.values.splice(index, 1);
-        else this.question.values.push(option.value);
+        if (index !== -1) this.question.value.splice(index, 1);
+        else this.question.value.push(option.value);
 
-        this.form.controls[this.question.key].updateValue(this.question.values);
-        this.onValueChange(this.question.values)
+        this.form.controls[this.question.key].updateValue(this.question.value);
+        this.onValueChange(this.question.value)
     }
 
     chackboxValueChange() {
-        if (this.question.values.length === 1) this.question.options.find(a => a.value === this.question.values[0]).disabled = true;
+        if (this.question.value.length === 1) this.question.options.find(a => a.value === this.question.value[0]).disabled = true;
         else this.question.options.forEach(a => a.disabled = false)
     }
 
-    isSelectActive(option) {
-        return this.question.values.find(a => a === option.value) ? true : false;
-    }
+    onValueChange(event) { if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event}) }
+    isSelectActive(option) { return this.question.value.find(a => a === option.value) ? true : false }
 }

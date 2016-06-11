@@ -14,6 +14,7 @@
   "files": [
     "src/control-group.service.ts",
     "src/easy-forms.component.ts",
-    "src/question.component.ts"
+    "src/question.component.ts",
+    "src/data.interface.ts"
   ]
 }
