@@ -28,6 +28,23 @@ export class AppComponent {
         questions: [
             {
                 type: 'text',
+                key: 'Prvi',
+                label: 'Prvi',
+                validation: [
+                    {type: 'required'}
+                ]
+            },
+            {
+                type: 'text',
+                key: 'Drugi',
+                label: 'Drugi',
+                validation: [
+                    {type: 'match', value: 'Prvi', message: 'Need to match'},
+                    {type: 'required'},
+                ]
+            },
+            {
+                type: 'text',
                 key: 'firstName',
                 value: 'John Doe',
                 label: 'First Name',

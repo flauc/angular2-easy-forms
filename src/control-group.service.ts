@@ -1,14 +1,7 @@
 import {Injectable} from '@angular/core'
 import {FormBuilder, Validators} from '@angular/common'
 import {Question, Validation} from './data.interface'
-
-function match(key) {
-    return (control) => {
-        if (control.value && control.root.controls)
-            return control.root.controls[key].value !== control.value ? {'match': {'actualValue': key,  'requiredValue': control.root.controls[key].value}} : null;
-        return null;
-    };
-}
+import {CustomValidators} from './custom-validators.class'
 
 @Injectable()
 export class ControlGroupService {
@@ -44,7 +37,7 @@ export class ControlGroupService {
                 case 'maxLength': return Validators.maxLength(item.value);
                 case 'pattern': return Validators.pattern(item.value);
                 case 'custom': return item.value;
-                case 'match': return match(item.value);
+                case 'match': return CustomValidators.match(item.value);
             }
         }
     }
