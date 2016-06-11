@@ -33,7 +33,6 @@ export class EasyFormsComponent {
         this.sortQuestions();
         
         let cg = this._controlGroup.create(this._data.questions);
-        
         this._form = cg.fbGroup;
         this._matches = cg.matches;
         this.setSettings();

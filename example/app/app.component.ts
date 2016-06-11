@@ -30,6 +30,9 @@ export class AppComponent {
                 type: 'text',
                 key: 'Prvi',
                 label: 'Prvi',
+                classes: {
+                    'wrapper': 'Test'
+                },
                 validation: [
                     {type: 'required'}
                 ]
