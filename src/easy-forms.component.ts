@@ -31,7 +31,11 @@ export class EasyFormsComponent {
     set easyFormData(value: EasyFormData) {
         this._data = value;
         this.sortQuestions();
-        this._form = this._controlGroup.create(this._data.questions);
+        
+        let cg = this._controlGroup.create(this._data.questions);
+        
+        this._form = cg.formGroup;
+        this._matches = cg.matches;
         this.setSettings();
         this.comp = {data: this._data, form: this._form};
     }
@@ -44,13 +48,24 @@ export class EasyFormsComponent {
 
     private _data: EasyFormData;
     private _form: ControlGroup;
+    private _matches: string[];
     
 
     submit() { this.onSubmit.emit(this._form.value) }
     onQuestionValueChange(event) {
-        console.log('prije: ', this._form.controls);
-        this._form.controls.forEach(a => a.updateValueAndValidity());
-        console.log('poslje: ', this._form.controls);
+        console.log(this._matches);
+
+        if (this._matches) {
+            console.log('got here');
+            let key = Object.keys(event)[0],
+                // See if we should check for matches
+                mat = this._matches.find(a => a.toMatch === key);
+
+            console.log(key, mat);
+
+            // Update the cg if we found a matcher
+            if (mat) this._form.controls[mat.model].updateValueAndValidity();
+        }
         this.onChanges.emit(event)
     }
     sortQuestions() { this._data.questions.sort((a, b) =>  a.order - b.order) }

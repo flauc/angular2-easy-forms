@@ -10,7 +10,9 @@ export class ControlGroupService {
     ) {}
 
     create(questions: Question[]): FormBuilder {
-        let temp = {};
+        let temp = {},
+            toReturn = {},
+            matches = [];
 
         questions.forEach(a => {
 
@@ -20,7 +22,7 @@ export class ControlGroupService {
 
                 if (Array.isArray(a.validation)) {
                     let validators = [];
-                    a.validation.forEach(i => validators.push(setValidator(i)));
+                    a.validation.forEach(i => validators.push(setValidator(i, a)));
                     temp[a.key].push(Validators.compose(validators))
                 }
 
@@ -28,16 +30,23 @@ export class ControlGroupService {
             }
         });
 
-        return this.fb.group(temp);
+        toReturn['fbGroup'] = this.fb.group(temp);
+    
+        // Add matches for watching if required
+        if (matches.length) toReturn['matches'] = matches;
 
-        function setValidator(item: Validation) {
+        return toReturn;
+
+        function setValidator(item: Validation, original?) {
             switch (item.type) {
                 case 'required': return Validators.required;
                 case 'minLength': return Validators.minLength(item.value);
                 case 'maxLength': return Validators.maxLength(item.value);
                 case 'pattern': return Validators.pattern(item.value);
                 case 'custom': return item.value;
-                case 'match': return CustomValidators.match(item.value);
+                case 'match':
+                    matches.push({toMatch: item.value, model: original.key});
+                    return CustomValidators.match(item.value);
             }
         }
     }
