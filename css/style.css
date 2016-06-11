@@ -32,6 +32,7 @@ h4 {
 }
 h1 {
   text-align: center;
+  margin-bottom: 50px;
 }
 input[type="email"],
 input[type="number"],
@@ -60,6 +61,15 @@ input[type="password"]:focus {
   outline: 0;
   width: 100%;
 }
+input[type="email"]:focus.ng-invalid.ng-dirty,
+input[type="number"]:focus.ng-invalid.ng-dirty,
+input[type="search"]:focus.ng-invalid.ng-dirty,
+input[type="text"]:focus.ng-invalid.ng-dirty,
+input[type="tel"]:focus.ng-invalid.ng-dirty,
+input[type="url"]:focus.ng-invalid.ng-dirty,
+input[type="password"]:focus.ng-invalid.ng-dirty {
+  border: 1px solid #ef5350;
+}
 label {
   margin-bottom: 5px;
   display: block;
@@ -71,20 +81,27 @@ label {
 .error-block span {
   width: 100%;
   float: left;
-  padding: 0 7px;
+  padding: 4px 0;
   color: #ef5350;
 }
-.submit input[type="submit"] {
-  padding: 10px 30px;
-  font-size: 18px;
-  text-transform: uppercase;
-  border: 1px solid #666;
-  color: #666;
+.submit {
   position: absolute;
   bottom: -23px;
   left: 50%;
   display: inline-block;
   transform: translateX(-50%);
+}
+.submit input[type="submit"] {
+  background: #fff;
+  padding: 10px 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 1px solid #666;
+  color: #666;
+}
+.submit input[type="submit"]:disabled {
+  cursor: not-allowed;
+  border: 1px solid #ef5350;
 }
 .block {
   width: 96%;
