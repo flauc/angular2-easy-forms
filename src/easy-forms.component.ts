@@ -52,20 +52,17 @@ export class EasyFormsComponent {
     
 
     submit() { this.onSubmit.emit(this._form.value) }
-    onQuestionValueChange(event) {
-        console.log(this._matches);
 
+    onQuestionValueChange(event) {
         if (this._matches) {
-            console.log('got here');
             let key = Object.keys(event)[0],
                 // See if we should check for matches
                 mat = this._matches.find(a => a.toMatch === key);
 
-            console.log(key, mat);
-
             // Update the cg if we found a matcher
             if (mat) this._form.controls[mat.model].updateValueAndValidity();
         }
+
         this.onChanges.emit(event)
     }
     sortQuestions() { this._data.questions.sort((a, b) =>  a.order - b.order) }
