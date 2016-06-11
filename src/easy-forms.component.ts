@@ -34,7 +34,7 @@ export class EasyFormsComponent {
         
         let cg = this._controlGroup.create(this._data.questions);
         
-        this._form = cg.formGroup;
+        this._form = cg.fbGroup;
         this._matches = cg.matches;
         this.setSettings();
         this.comp = {data: this._data, form: this._form};
