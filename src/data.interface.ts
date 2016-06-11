@@ -28,7 +28,7 @@ export interface Settings {
 
 export interface Classes {
     form: string | Array<string>
-    input: string | Array<string>
+    submit: string | Array<string>
 }
 
 export interface Validation {

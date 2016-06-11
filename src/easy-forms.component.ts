@@ -15,7 +15,7 @@ import {EasyFormData} from './data.interface'
         <div>
             <form (ngSubmit)="submit()" [ngFormModel]="comp.form" [ngClass]="comp.data.classes?.form">
                 <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form}" (valueChange)="onQuestionValueChange($event)"></ef-question>
-                <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.input">
+                <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.submit">
                     <input type="submit" [disabled]="!comp.form.valid" [value]="comp.data.settings.submitButtonText">
                 </div>
             </form>
