@@ -37,7 +37,7 @@ Then you define a list of questions as well as a settings and classes object if 
     selector: 'app',
     directives: [EasyFormsComponent],
     template: `
-        <easy-forms [data]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-forms>
+        <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
     `
 })
 export class AppComponent {
@@ -209,7 +209,7 @@ There are two events you can bind to:
 
 This is how you bind to them: 
 ```html
-<easy-forms [data]="data" (onSubmit)="fuFunction($event)" (onChanges)="barFunction($event)"></easy-forms>
+<easy-form [easyFormData]="data" (onSubmit)="fuFunction($event)" (onChanges)="barFunction($event)"></easy-form>
 ```
 
 ### onSubmit
