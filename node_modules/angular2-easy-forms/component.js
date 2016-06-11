@@ -1,0 +1,1 @@
+exports.EasyFormsComponent = require('./lib/easy-forms.component').EasyFormsComponent;
