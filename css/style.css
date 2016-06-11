@@ -61,13 +61,7 @@ input[type="password"]:focus {
   outline: 0;
   width: 100%;
 }
-input[type="email"]:focus.ng-invalid.ng-dirty,
-input[type="number"]:focus.ng-invalid.ng-dirty,
-input[type="search"]:focus.ng-invalid.ng-dirty,
-input[type="text"]:focus.ng-invalid.ng-dirty,
-input[type="tel"]:focus.ng-invalid.ng-dirty,
-input[type="url"]:focus.ng-invalid.ng-dirty,
-input[type="password"]:focus.ng-invalid.ng-dirty {
+input.ng-invalid.ng-dirty {
   border: 1px solid #ef5350;
 }
 label {
@@ -119,4 +113,5 @@ label {
   left: 50px;
   top: -13px;
   padding: 0 20px;
+  color: #666;
 }
