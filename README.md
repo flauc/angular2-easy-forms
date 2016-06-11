@@ -47,10 +47,10 @@ export class AppComponent {
         settings: {
             submitButtonText: 'Send',
         },
-        classes {
+        classes: {
             form: 'some-class',
             submit: ['class-one', 'class-two']
-        }
+        },
         questions: [
             {
                 type: 'text',
@@ -93,7 +93,7 @@ export class AppComponent {
                     'label': 'label-class',
                     'question': ['q-class-one', 'q-class-two'],
                     'error': ['error-one', 'error-two']
-                }
+                },
                 options: [
                     {value: 'male', name: 'Male'},
                     {value: 'female', name: 'Female'}
