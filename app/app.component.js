@@ -11,7 +11,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, platform_browser_dynamic_1, easy_forms_1;
-    var AppComponent;
+    var AppComponent, CustomValidators;
     return {
         setters:[
             function (core_1_1) {
@@ -29,6 +29,10 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                     this.data = {
                         settings: {
                             submitButtonText: 'Send',
+                        },
+                        classes: {
+                            form: 'some-class',
+                            submit: ['class-one', 'class-two']
                         },
                         questions: [
                             {
@@ -48,7 +52,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                                 label: 'Password',
                                 validation: [
                                     { type: 'required' },
-                                    { type: 'custom', value: startsWithNumber, message: 'Please dont start with a number' }
+                                    { type: 'custom', value: CustomValidators.startsWithNumber, message: 'Please dont start with a number' }
                                 ]
                             },
                             {
@@ -67,6 +71,12 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                                 key: 'gender',
                                 label: 'Gender',
                                 value: 'male',
+                                classes: {
+                                    'wrapper': 'some-class-for-the-wrapper',
+                                    'label': 'label-class',
+                                    'question': ['q-class-one', 'q-class-two'],
+                                    'error': ['error-one', 'error-two']
+                                },
                                 options: [
                                     { value: 'male', name: 'Male' },
                                     { value: 'female', name: 'Female' }
@@ -99,13 +109,23 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                     core_1.Component({
                         selector: 'app',
                         directives: [easy_forms_1.EasyFormsComponent],
-                        template: "\n        <h1>Testing</h1>\n        <easy-forms [data]=\"data\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-forms>\n    "
+                        template: "\n        <h1>Easy Forms Example</h1>\n        <easy-form [easyFormData]=\"data\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());
             exports_1("AppComponent", AppComponent);
+            CustomValidators = (function () {
+                function CustomValidators() {
+                }
+                CustomValidators.startsWithNumber = function (control) {
+                    if (control.value !== '' && !isNaN(control.value.charAt(0)))
+                        return { 'startsWithNumber': true };
+                    return null;
+                };
+                return CustomValidators;
+            }());
             platform_browser_dynamic_1.bootstrap(AppComponent, []);
         }
     }

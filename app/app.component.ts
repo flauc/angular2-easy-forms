@@ -6,8 +6,8 @@ import {EasyFormsComponent} from 'easy-forms'
     selector: 'app',
     directives: [EasyFormsComponent],
     template: `
-        <h1>Testing</h1>
-        <easy-forms [data]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-forms>
+        <h1>Easy Forms Example</h1>
+        <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
     `
 })
 export class AppComponent {
@@ -16,6 +16,10 @@ export class AppComponent {
     public data = {
         settings: {
             submitButtonText: 'Send',
+        },
+        classes: {
+            form: 'some-class',
+            submit: ['class-one', 'class-two']
         },
         questions: [
             {
@@ -35,7 +39,7 @@ export class AppComponent {
                 label: 'Password',
                 validation: [
                     {type: 'required'},
-                    {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
+                    {type: 'custom', value: CustomValidators.startsWithNumber, message: 'Please dont start with a number'}
                 ]
             },
             {
@@ -54,6 +58,12 @@ export class AppComponent {
                 key: 'gender',
                 label: 'Gender',
                 value: 'male',
+                classes: {
+                    'wrapper': 'some-class-for-the-wrapper',
+                    'label': 'label-class',
+                    'question': ['q-class-one', 'q-class-two'],
+                    'error': ['error-one', 'error-two']
+                },
                 options: [
                     {value: 'male', name: 'Male'},
                     {value: 'female', name: 'Female'}
@@ -82,6 +92,13 @@ export class AppComponent {
 
     onChanges(event) {
         console.log(event)
+    }
+}
+
+class CustomValidators {
+    static startsWithNumber(control) {
+        if (control.value !== '' && !isNaN(control.value.charAt(0))) return {'startsWithNumber': true};
+        return null;
     }
 }
 
