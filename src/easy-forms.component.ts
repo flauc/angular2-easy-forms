@@ -48,7 +48,9 @@ export class EasyFormsComponent {
 
     submit() { this.onSubmit.emit(this._form.value) }
     onQuestionValueChange(event) {
-        console.log(this._form.controls);
+        console.log('prije: ', this._form.controls);
+        this._form.controls.forEach(a => a.updateValueAndValidity());
+        console.log('poslje: ', this._form.controls);
         this.onChanges.emit(event)
     }
     sortQuestions() { this._data.questions.sort((a, b) =>  a.order - b.order) }
