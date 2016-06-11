@@ -10,7 +10,6 @@
     "declaration": false
   },
   "exclude": [
-    "node_modules",
-    "angular2-notifications"
+    "node_modules"
   ]
 }

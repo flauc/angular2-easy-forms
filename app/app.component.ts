@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {EasyFormsComponent} from 'easy-forms';
+import {Component} from '@angular/core'
+import {bootstrap} from '@angular/platform-browser-dynamic'
+import {EasyFormsComponent} from 'easy-forms'
 
 function startsWithNumber(control) {
 
@@ -92,3 +93,6 @@ export class AppComponent {
         console.log(event)
     }
 }
+
+
+bootstrap(AppComponent, []);
