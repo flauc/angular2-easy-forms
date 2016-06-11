@@ -80,20 +80,26 @@ label {
   text-transform: uppercase;
   border: 1px solid #666;
   color: #666;
+  position: absolute;
+  bottom: -23px;
+  left: 50%;
+  display: inline-block;
+  transform: translateX(-50%);
 }
 .block {
   width: 96%;
   float: left;
-  margin-right: 2%;
-  border: 1px solid #666;
+  margin: 0 2%;
+  border-radius: 4px;
   position: relative;
-  padding: 20px;
+  padding: 20px 20px 40px 20px;
+  border: 1px solid #666;
 }
 .block .title {
   position: absolute;
   background: #fff;
   font-size: 20px;
   left: 50px;
-  top: -20px;
+  top: -13px;
   padding: 0 20px;
 }

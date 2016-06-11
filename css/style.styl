@@ -62,6 +62,9 @@ input
     outline 0
     width 100%
 
+    &.ng-invalid.ng-dirty
+      border 1px solid #ef5350
+
 label
   margin-bottom 5px
   display block
@@ -76,24 +79,36 @@ label
     color #ef5350
 
 .submit
+  position absolute
+  bottom -23px
+  left 50%
+  display inline-block
+  transform translateX(-50%)
+
   input[type="submit"]
+    background #fff
     padding 10px 30px
     font-size 18px
     text-transform uppercase
     border 1px solid #666
     color #666
 
+    &:disabled
+      cursor not-allowed
+      border 1px solid #ef5350
+
 .block
   width 96%
   float left
-  margin-right 2%
-  border 1px solid #666
+  margin 0 2%
+  border-radius 4px
   position relative
-  padding 20px
+  padding 20px 20px 40px 20px
+  border 1px solid #666
   .title
     position absolute
     background #fff
     font-size 20px
     left 50px
-    top -20px
+    top -13px
     padding 0 20px
