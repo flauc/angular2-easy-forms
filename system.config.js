@@ -6,7 +6,7 @@
             'easy-forms': 'node_modules/angular2-easy-forms'
         },
         packages = {
-            'app': { main: 'main.js', defaultExtension: 'js' },
+            'app': { main: 'app.component.js', defaultExtension: 'js' },
             'rxjs': { defaultExtension: 'js' },
             'easy-forms': {main: 'component.js', defaultExtension: 'js'}
         },
@@ -16,7 +16,6 @@
             '@angular/core',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
-            '@angular/router',
             '@angular/upgrade'
         ];
 

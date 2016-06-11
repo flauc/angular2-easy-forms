@@ -2,15 +2,6 @@ import {Component} from '@angular/core'
 import {bootstrap} from '@angular/platform-browser-dynamic'
 import {EasyFormsComponent} from 'easy-forms'
 
-function startsWithNumber(control) {
-
-    if (control.value !== '' && !isNaN(control.value.charAt(0))) {
-        return {'startsWithNumber': true};
-    }
-
-    return null;
-}
-
 @Component({
     selector: 'app',
     directives: [EasyFormsComponent],
