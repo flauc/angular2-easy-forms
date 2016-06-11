@@ -2,6 +2,10 @@ body
   margin 0
   font-family 'Roboto', sans-serif
 
+h1
+h4
+  font-weight 400
+
 .container
   position relative
   width 100%
@@ -20,7 +24,6 @@ body
   margin-right 2%
   &:nth-child(2n)
     margin-right 0
-
 h1
   text-align center
 
@@ -35,8 +38,11 @@ input
   &[type="url"]
   &[type="password"]
     border 1px solid #888
-    padding 5px 7px
+    padding 10px
     appearance none
+    width 100%
+    border-radius 4px
+    font-size 16px
 
 
 input
@@ -54,3 +60,20 @@ input
 label
   margin-bottom 5px
   display block
+
+.error-block
+  width 100%
+  float: left
+  span
+    width 100%
+    float left
+    padding 0 7px
+    color #ef5350
+
+.submit
+  input[type="submit"]
+    padding 10px 30px
+    font-size 18px
+    text-transform uppercase
+    border 1px solid #666
+    color #666

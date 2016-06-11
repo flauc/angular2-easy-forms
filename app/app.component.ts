@@ -6,16 +6,21 @@ import {EasyFormsComponent} from 'easy-forms'
     selector: 'app',
     directives: [EasyFormsComponent],
     template: `
-        <h1>Easy Forms Examples</h1>
-        
-        <h4>Matching Passwords</h4>
-        <easy-form [easyFormData]="formOne" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
+        <div class="container">
+            <h1>Easy Forms Examples</h1>
+    
+            <h4>Matching Passwords</h4>
+            <easy-form [easyFormData]="formOne" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
+        </div>
     `
 })
 export class AppComponent {
     constructor() {}
     
     public formOne = {
+        classes: {
+            'submit': 'submit'
+        },
         questions: [
             {
                 type: 'password',

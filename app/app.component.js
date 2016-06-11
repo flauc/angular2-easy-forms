@@ -27,6 +27,9 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
             AppComponent = (function () {
                 function AppComponent() {
                     this.formOne = {
+                        classes: {
+                            'submit': 'submit'
+                        },
                         questions: [
                             {
                                 type: 'password',
@@ -137,7 +140,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', 'easy-for
                     core_1.Component({
                         selector: 'app',
                         directives: [easy_forms_1.EasyFormsComponent],
-                        template: "\n        <h1>Easy Forms Examples</h1>\n        \n        <h4>Matching Passwords</h4>\n        <easy-form [easyFormData]=\"formOne\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n    "
+                        template: "\n        <div class=\"container\">\n            <h1>Easy Forms Examples</h1>\n    \n            <h4>Matching Passwords</h4>\n            <easy-form [easyFormData]=\"formOne\" (onSubmit)=\"onSubmit($event)\" (onChanges)=\"onChanges($event)\"></easy-form>\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
