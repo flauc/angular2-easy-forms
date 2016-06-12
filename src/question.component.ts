@@ -62,7 +62,7 @@ import {Question} from './data.interface'
                     [id]="question.key"> 
             </div>
             
-            <div class="error-block" [hidden]="isValid" [ngClass]="question.classes?.error">
+            <div class="error-block" [hidden]="showErrorMsg" [ngClass]="question.classes?.error">
                 <span *ngFor="let e of errors()">{{e}}</span>
             </div>
         </div>
@@ -80,22 +80,26 @@ export class QuestionComponent {
     set info(value) {
         this.question = value.question;
         this.form = value.form;
-        this.settings = value.settings;
+        this._settings = value.settings;
 
         if (this.question.type === 'checkbox') {
-            if (!this.question.value) this.question.value = [];
-            if (this.question.validation && this.question.validation.find(a => a.type === 'required')) this.checkboxIsRequired = true;
+            this.question.value = !this.question.value ? [] : this.question.value;
+            this.checkboxIsRequired = this.question.validation && this.question.validation.find(a => a.type === 'required');
         }
     }
     
     question: Question;
     form: ControlGroup;
-    settings: any;
     valueChange: EventEmitter = new EventEmitter();
 
-    get isValid() { return this.form.controls[this.question.key].valid }
+    get showErrorMsg() {
+        return this._settings.errorOnDirty ?
+            !this.form.controls[this.question.key].valid && this.form.controls[this.question.key].dirty :
+            !this.form.controls[this.question.key].valid
+    }
 
     private checkboxIsRequired: boolean = false;
+    private _settings: any;
 
     
     errors() {
