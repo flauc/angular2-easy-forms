@@ -103,13 +103,13 @@ export class QuestionComponent {
 
     
     errors() {
-        if (this.question.validation && !this.form.valid) {
+        if (this.question.validation && !this.form.controls[this.question.key].valid) {
             let temp: any = [],
                 errors = this.form.controls[this.question.key].errors,
                 errorKeys = Object.keys(errors);
             
-            if (this.settings.singleErrorMessage) temp.push(this._setError(errorKeys[errorKeys.length - 1]));
-            else errorKeys.forEach(a => temp.push(this._setError(a)));
+            if (this.settings.singleErrorMessage) temp.push(this._setError(errorKeys[errorKeys.length - 1], errors));
+            else errorKeys.forEach(a => temp.push(this._setError(a, errors)));
 
             return temp;
         }
@@ -138,7 +138,7 @@ export class QuestionComponent {
     onValueChange(event) { if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event}) }
     isSelectActive(option) { return this.question.value.find(a => a === option.value) ? true : false }
 
-    private _setError(item) {
+    private _setError(item, errors) {
         let errorMsg: string = this.question.validation.find(a => a.type.toLowerCase() === item).message,
             tag: string = this.question.label || this.question.key;
     
@@ -146,7 +146,7 @@ export class QuestionComponent {
             switch (item) {
                 // Set error messages
                 case 'required':
-                    errorMsg = `${tag} is required`;
+                    errorMsg = `${tag} is required.`;
                     break;
     
                 case 'minlength':
