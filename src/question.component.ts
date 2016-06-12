@@ -62,7 +62,7 @@ import {Question} from './data.interface'
                     [id]="question.key"> 
             </div>
             
-            <div class="error-block" [hidden]="showErrorMsg" [ngClass]="question.classes?.error">
+            <div class="error-block" *ngIf="settings.showValidation" [hidden]="showErrorMsg" [ngClass]="question.classes?.error">
                 <span *ngFor="let e of errors()">{{e}}</span>
             </div>
         </div>
@@ -80,41 +80,75 @@ export class QuestionComponent {
     set info(value) {
         this.question = value.question;
         this.form = value.form;
-        this._settings = value.settings;
+        this.settings = value.settings;
 
         if (this.question.type === 'checkbox') {
             this.question.value = !this.question.value ? [] : this.question.value;
             this.checkboxIsRequired = this.question.validation && this.question.validation.find(a => a.type === 'required');
         }
     }
-    
+
+    get showErrorMsg() {
+        return this.settings.errorOnDirty ?
+            !this.form.controls[this.question.key].valid && !this.form.controls[this.question.key].dirty :
+            !this.form.controls[this.question.key].valid
+    }
+
     question: Question;
     form: ControlGroup;
     valueChange: EventEmitter = new EventEmitter();
 
-    get showErrorMsg() {
-        return this._settings.errorOnDirty ?
-            !this.form.controls[this.question.key].valid && this.form.controls[this.question.key].dirty :
-            !this.form.controls[this.question.key].valid
-    }
-
     private checkboxIsRequired: boolean = false;
-    private _settings: any;
+    private settings: any;
 
     
     errors() {
-        if (Array.isArray(this.question.validation)) {
+        if (this.question.validation && !this.form.valid) {
             let temp = [];
 
-            this.question.validation.forEach(a => {
-                if (a.type === 'required' && !a.message) temp.push(`${this.question.label || this.question.key} is required`);
-                if (this.form.controls[this.question.key].hasError(a.type.toLowerCase())) temp.push(a.message);
-            });
+
+            if (this.settings.singleErrorMessage) {
+
+            }
+
+            else {
+                this.question.validation.forEach(a => {
+                    if (this.form.controls[this.question.key].hasError(a.type.toLowerCase())) temp.push(setError(a));
+                });
+            }
 
             return temp;
         }
 
-        else return this.question.validation.message;
+        function setError(item): string {
+            let errorMsg: string = item.message,
+                tag: string = this.question.label || this.question.key;
+
+            if (!errorMsg) {
+                switch (item.type) {
+                    // Set error messages
+                    case 'required':
+                        errorMsg = `${tag} is required`;
+                        break;
+
+                    case 'minLength':
+                        errorMsg = `${tag} has to be at least ${this.form.controls[this.question.key].errors.minLength.requiredLength} characters long.`;
+                        break;
+
+                    case 'maxLength':
+                        errorMsg = `${tag} can't be longer then ${this.form.controls[this.question.key].errors.maxLength.requiredLength} characters.`;
+                        break;
+
+                    case 'pattern':
+                        break;
+
+                    case 'match':
+                        break;
+                }
+            }
+
+            return errorMsg;
+        }
     }
 
     setRadio(option) {

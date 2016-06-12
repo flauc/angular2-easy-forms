@@ -14,7 +14,7 @@ import {EasyFormData} from './data.interface'
     template: `
         <div>
             <form (ngSubmit)="submit()" [ngFormModel]="comp.form" [ngClass]="comp.data.classes?.form">
-                <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form}" (valueChange)="onQuestionValueChange($event)"></ef-question>
+                <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form, settings: comp.settings}" (valueChange)="onQuestionValueChange($event)"></ef-question>
                 <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.submit">
                     <input type="submit" [disabled]="!comp.form.valid" [value]="comp.data.settings.submitButtonText">
                 </div>
@@ -60,6 +60,7 @@ export class EasyFormsComponent {
     submit() { this.onSubmit.emit(this._form.value) }
 
     onQuestionValueChange(event) {
+        console.log(this._form);
         if (this._matches) {
             let key = Object.keys(event)[0],
                 // See if we should check for matches
@@ -77,6 +78,7 @@ export class EasyFormsComponent {
         let defaultSettings = {
             submitButton: true,
             submitButtonText: 'Submit',
+            showValidation: true,
             singleErrorMessage: true,
             errorOnDirty: true
         };
