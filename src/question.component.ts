@@ -104,50 +104,48 @@ export class QuestionComponent {
     
     errors() {
         if (this.question.validation && !this.form.valid) {
-            let temp = [];
+            let temp: any = [],
+                errors = this.form.controls[this.question.key].errors,
+                errorKeys = Object.keys(errors);
 
-
-            if (this.settings.singleErrorMessage) {
-
-            }
-
-            else {
-                this.question.validation.forEach(a => {
-                    if (this.form.controls[this.question.key].hasError(a.type.toLowerCase())) temp.push(setError(a));
-                });
-            }
+            console.log(errorKeys);
+            
+            if (this.settings.singleErrorMessage) temp = setError(errorKeys[errorKeys.length - 1]);
+            else errorKeys.forEach(a => temp.push(setError(a)));
 
             return temp;
-        }
 
-        function setError(item): string {
-            let errorMsg: string = item.message,
-                tag: string = this.question.label || this.question.key;
+            function setError(item): string {
+                let errorMsg: string = this.question.validation.find(a => a.type.toLowerCase() === item).message,
+                    tag: string = this.question.label || this.question.key;
 
-            if (!errorMsg) {
-                switch (item.type) {
-                    // Set error messages
-                    case 'required':
-                        errorMsg = `${tag} is required`;
-                        break;
+                if (!errorMsg) {
+                    switch (item) {
+                        // Set error messages
+                        case 'required':
+                            errorMsg = `${tag} is required`;
+                            break;
 
-                    case 'minLength':
-                        errorMsg = `${tag} has to be at least ${this.form.controls[this.question.key].errors.minLength.requiredLength} characters long.`;
-                        break;
+                        case 'minlength':
+                            errorMsg = `${tag} has to be at least ${errors[item].requiredLength} characters long.`;
+                            break;
 
-                    case 'maxLength':
-                        errorMsg = `${tag} can't be longer then ${this.form.controls[this.question.key].errors.maxLength.requiredLength} characters.`;
-                        break;
+                        case 'maxlength':
+                            errorMsg = `${tag} can't be longer then ${errors[item].requiredLength} characters.`;
+                            break;
 
-                    case 'pattern':
-                        break;
+                        case 'pattern':
+                            errorMsg = `${tag} must match this pattern: ${errors[item].requiredPattern}.`;
+                            break;
 
-                    case 'match':
-                        break;
+                        case 'match':
+                            errorMsg = `${tag} must match the ${errors[item].mustMatchField} field.`;
+                            break;
+                    }
                 }
-            }
 
-            return errorMsg;
+                return errorMsg;
+            }
         }
     }
 
