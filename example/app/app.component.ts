@@ -24,7 +24,8 @@ export class AppComponent {
     public data = {
         settings: {
             submitButtonText: 'Send',
-            errorOnDirty: true
+            errorOnDirty: true,
+            showValidation: false
         },
         questions: [
             {

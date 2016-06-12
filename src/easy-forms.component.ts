@@ -2,7 +2,7 @@ import {Component, EventEmitter} from '@angular/core'
 import {ControlGroup} from '@angular/common'
 import {ControlGroupService} from './control-group.service'
 import {QuestionComponent} from './question.component'
-import {EasyFormData} from './data.interface'
+import {EasyFormData, Settings} from './data.interface'
 
 
 @Component({
@@ -30,12 +30,12 @@ export class EasyFormsComponent {
     // Input
     set easyFormData(value: EasyFormData) {
         this._data = value;
+        this._data.settings = this._setSettings(value.settings);
         this.sortQuestions();
-        
+
         let cg = this._controlGroup.create(this._data.questions);
         this._form = cg.fbGroup;
         this._matches = cg.matches;
-        this.setSettings();
         this.comp = {
             data: this._data, 
             form: this._form, 
@@ -61,7 +61,6 @@ export class EasyFormsComponent {
     submit() { this.onSubmit.emit(this._form.value) }
 
     onQuestionValueChange(event) {
-        console.log(this._form);
         if (this._matches) {
             let key = Object.keys(event)[0],
                 // See if we should check for matches
@@ -75,7 +74,7 @@ export class EasyFormsComponent {
     }
     sortQuestions() { this._data.questions.sort((a, b) =>  a.order - b.order) }
     
-    setSettings() {
+    private _setSettings(settings: Settings) {
         let defaultSettings = {
             submitButton: true,
             submitButtonText: 'Submit',
@@ -83,14 +82,12 @@ export class EasyFormsComponent {
             singleErrorMessage: true,
             errorOnDirty: true
         };
-    
-        if (this._data.settings) {
-            // Add default settings
+
+        // Add received settings
+        if (settings)
             for (let p in defaultSettings)
-                if (!this._data.settings[p])
-                    this._data.settings[p] = defaultSettings[p];   
-        }
-        
-        else this._data.settings = defaultSettings;
+                defaultSettings[p] = settings.hasOwnProperty(p) ? settings[p] : defaultSettings[p]
+
+        return defaultSettings;
     }
 }
