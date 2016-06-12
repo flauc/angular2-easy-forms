@@ -41,7 +41,8 @@ export class EasyFormsComponent {
             form: this._form, 
             settings: {
                 singleErrorMessage: this._data.settings.singleErrorMessage,
-                errorOnDirty: this._data.settings.errorOnDirty
+                errorOnDirty: this._data.settings.errorOnDirty,
+                showValidation: this._data.settings.showValidation
             }
         };
     }

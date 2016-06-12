@@ -107,45 +107,11 @@ export class QuestionComponent {
             let temp: any = [],
                 errors = this.form.controls[this.question.key].errors,
                 errorKeys = Object.keys(errors);
-
-            console.log(errorKeys);
             
-            if (this.settings.singleErrorMessage) temp = setError(errorKeys[errorKeys.length - 1]);
-            else errorKeys.forEach(a => temp.push(setError(a)));
+            if (this.settings.singleErrorMessage) temp.push(this._setError(errorKeys[errorKeys.length - 1]));
+            else errorKeys.forEach(a => temp.push(this._setError(a)));
 
             return temp;
-
-            function setError(item): string {
-                let errorMsg: string = this.question.validation.find(a => a.type.toLowerCase() === item).message,
-                    tag: string = this.question.label || this.question.key;
-
-                if (!errorMsg) {
-                    switch (item) {
-                        // Set error messages
-                        case 'required':
-                            errorMsg = `${tag} is required`;
-                            break;
-
-                        case 'minlength':
-                            errorMsg = `${tag} has to be at least ${errors[item].requiredLength} characters long.`;
-                            break;
-
-                        case 'maxlength':
-                            errorMsg = `${tag} can't be longer then ${errors[item].requiredLength} characters.`;
-                            break;
-
-                        case 'pattern':
-                            errorMsg = `${tag} must match this pattern: ${errors[item].requiredPattern}.`;
-                            break;
-
-                        case 'match':
-                            errorMsg = `${tag} must match the ${errors[item].mustMatchField} field.`;
-                            break;
-                    }
-                }
-
-                return errorMsg;
-            }
         }
     }
 
@@ -171,4 +137,36 @@ export class QuestionComponent {
 
     onValueChange(event) { if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event}) }
     isSelectActive(option) { return this.question.value.find(a => a === option.value) ? true : false }
+
+    private _setError(item) {
+        let errorMsg: string = this.question.validation.find(a => a.type.toLowerCase() === item).message,
+            tag: string = this.question.label || this.question.key;
+    
+        if (!errorMsg) {
+            switch (item) {
+                // Set error messages
+                case 'required':
+                    errorMsg = `${tag} is required`;
+                    break;
+    
+                case 'minlength':
+                    errorMsg = `${tag} has to be at least ${errors[item].requiredLength} characters long.`;
+                    break;
+    
+                case 'maxlength':
+                    errorMsg = `${tag} can't be longer then ${errors[item].requiredLength} characters.`;
+                    break;
+    
+                case 'pattern':
+                    errorMsg = `${tag} must match this pattern: ${errors[item].requiredPattern}.`;
+                    break;
+    
+                case 'match':
+                    errorMsg = `${tag} must match the ${errors[item].mustMatchField} field.`;
+                    break;
+            }
+        }
+    
+        return errorMsg;
+    }
 }

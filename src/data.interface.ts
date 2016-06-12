@@ -25,6 +25,7 @@ export interface Settings {
     submitButton: boolean
     submitButtonText: string
     singleErrorMessage: boolean
+    showValidation: boolean
     errorOnDirty: boolean
 }
 

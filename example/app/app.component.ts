@@ -54,8 +54,8 @@ export class AppComponent {
                 label: 'First Name',
                 validation: [
                     {type: 'required'},
-                    {type: 'maxLength', value: 5, message: 'Please enter a name longer then 5 characters'},
-                    {type: 'pattern', value: '[a-zA-Z ]+', message: 'Only letters and spaces are allowed'}
+                    {type: 'maxLength', value: 5},
+                    {type: 'pattern', value: '[a-zA-Z ]+'}
                 ]
             },
             {
