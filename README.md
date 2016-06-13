@@ -228,6 +228,10 @@ property | type | default | description
 ------------ | ------------- | ------------ | ------------
 submitButton | boolean | true | Define whether to display the submit button or not
 submitButtonText | string | Send | The text of the send button
+showValidation | boolean | true | Define whether validation errors should be shown or not
+singleErrorMessage | boolean | true | Defines whether all of the validation errors should be shown or just the last one
+errorOnDirty | boolean | true | Define if validation errors should appear only when the input is dirty or right away
+
 
 You can also provide a classes object to add classes to the form wrapper and the submit wrapper: 
 ```js 
