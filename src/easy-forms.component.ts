@@ -12,14 +12,12 @@ import {EasyFormData, Settings} from './data.interface'
     inputs: ['easyFormData'],
     outputs: ['onSubmit', 'onChanges'],
     template: `
-        <div>
-            <form (ngSubmit)="submit()" [ngFormModel]="comp.form" [ngClass]="comp.data.classes?.form">
-                <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form, settings: comp.settings}" (valueChange)="onQuestionValueChange($event)"></ef-question>
-                <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.submit">
-                    <input type="submit" [disabled]="!comp.form.valid" [value]="comp.data.settings.submitButtonText">
-                </div>
-            </form>
-        </div>
+        <form (ngSubmit)="submit()" [ngFormModel]="comp.form" [ngClass]="comp.data.classes?.form">
+            <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form, settings: comp.settings}" (valueChange)="onQuestionValueChange($event)"></ef-question>
+            <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.submit">
+                <input type="submit" [disabled]="!comp.form.valid" [value]="comp.data.settings.submitButtonText">
+            </div>
+        </form>
     `
 })
 export class EasyFormsComponent {

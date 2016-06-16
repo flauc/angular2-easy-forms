@@ -66,7 +66,6 @@ import {Question} from './data.interface'
                 <span *ngFor="let e of errors()">{{e}}</span>
             </div>
         </div>
-
     `
 })
 
