@@ -32,6 +32,7 @@ export class AppComponent {
                 type: 'text',
                 key: 'Prvi',
                 label: 'Prvi',
+                placeholder: 'perica',
                 classes: {
                     'wrapper': 'Test'
                 },

@@ -8,6 +8,7 @@ export interface Question {
     type: 'text' | 'password' | 'number' | 'dropdown' | 'radio' | 'checkbox'
     key: string
     label?: string
+    placeholder?: string
     value?: string | number | Array<string>
     order?: number
     emitChanges?: boolean

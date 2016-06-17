@@ -56,6 +56,7 @@ import {Question} from './data.interface'
                 <input 
                     *ngSwitchDefault
                     [ngControl]="question.key"  
+                    [attr.placeholder]="question.placeholder"
                     [type]="question.type"
                     (ngModelChange)="onValueChange($event)"
                     [ngClass]="question.classes?.question"
