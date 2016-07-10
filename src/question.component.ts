@@ -1,13 +1,14 @@
 import {Component, EventEmitter, HostBinding} from '@angular/core'
-import {ControlGroup} from '@angular/common'
+import {FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
 import {Question} from './data.interface'
 
 @Component({
     selector: 'ef-question',
     inputs: ['info'],
     outputs: ['valueChange'],
+    directives: [REACTIVE_FORM_DIRECTIVES],
     template: `
-        <div [ngFormModel]="form">
+        <div [formGroup]="form">
             <label 
                 *ngIf="question.label" 
                 [ngClass]="question.classes?.label"
@@ -17,19 +18,19 @@ import {Question} from './data.interface'
             
             <div [ngSwitch]="question.type">
                 <select 
-                    *ngSwitchWhen="'dropdown'"
-                    [ngControl]="question.key"
+                    *ngSwitchCase="'dropdown'"
+                    [formControlName]="question.key"
                     (ngModelChange)="onValueChange($event)"
                     [id]="question.key">
                     [ngClass]="question.classes?.question"
                     <option *ngFor="let o of question.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
                 </select>   
                 
-                <div *ngSwitchWhen="'checkbox'" [ngClass]="question.classes?.question">
+                <div *ngSwitchCase="'checkbox'" [ngClass]="question.classes?.question">
                     <div class="checkbox" *ngFor="let o of question.options">
                         <input 
                             [type]="question.type"
-                            [ngControl]="question.key"
+                            [formControlName]="question.key"
                             [name]="question.key"
                             [value]="o.value"
                             [checked]="isSelectActive(o)"
@@ -40,11 +41,11 @@ import {Question} from './data.interface'
                     </div>
                 </div>
                 
-                <div *ngSwitchWhen="'radio'" [ngClass]="question.classes?.question">
+                <div *ngSwitchCase="'radio'" [ngClass]="question.classes?.question">
                     <div class="radio" *ngFor="let o of question.options">
                         <input 
                             [type]="question.type"
-                            [ngControl]="question.key"
+                            [formControlName]="question.key"
                             [name]="question.key"
                             [value]="o.value"
                             [checked]="question.value === o.value"
@@ -55,7 +56,7 @@ import {Question} from './data.interface'
             
                 <input 
                     *ngSwitchDefault
-                    [ngControl]="question.key"  
+                    [formControlName]="question.key"  
                     [attr.placeholder]="question.placeholder"
                     [type]="question.type"
                     (ngModelChange)="onValueChange($event)"
@@ -95,7 +96,7 @@ export class QuestionComponent {
     }
 
     question: Question;
-    form: ControlGroup;
+    form: FormGroup;
     valueChange: EventEmitter = new EventEmitter();
 
     private checkboxIsRequired: boolean = false;
