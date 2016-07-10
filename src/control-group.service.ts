@@ -1,15 +1,11 @@
 import {Injectable} from '@angular/core'
-import {FormBuilder, Validators} from '@angular/common'
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Question, Validation} from './data.interface'
 import {CustomValidators} from './custom-validators.class'
 
 @Injectable()
 export class ControlGroupService {
-    constructor(
-        private fb: FormBuilder
-    ) {}
-
-    create(questions: Question[]): FormBuilder {
+    create(questions: Question[]): any {
         let temp = {},
             toReturn = {},
             matches = [];
@@ -28,9 +24,11 @@ export class ControlGroupService {
 
                 else temp[a.key].push(setValidator(a.validation))
             }
+
+            temp[a.key] = new FormControl(temp[a.key]);
         });
 
-        toReturn['fbGroup'] = this.fb.group(temp);
+        toReturn['fbGroup'] = new FormGroup(temp);
     
         // Add matches for watching if required
         if (matches.length) toReturn['matches'] = matches;

@@ -1,4 +1,4 @@
-import {Control} from '@angular/common'
+import {Control} from '@angular/form';
 
 export class CustomValidators {
     static match(key: string) {

@@ -1,5 +1,5 @@
 import {Component, EventEmitter} from '@angular/core'
-import {ControlGroup} from '@angular/common'
+import {FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
 import {ControlGroupService} from './control-group.service'
 import {QuestionComponent} from './question.component'
 import {EasyFormData, Settings} from './data.interface'
@@ -8,14 +8,14 @@ import {EasyFormData, Settings} from './data.interface'
 @Component({
     selector: 'easy-form',
     providers: [ControlGroupService],
-    directives: [QuestionComponent],
+    directives: [REACTIVE_FORM_DIRECTIVES, QuestionComponent],
     inputs: ['easyFormData'],
     outputs: ['onSubmit', 'onChanges'],
     template: `
-        <form (ngSubmit)="submit()" [ngFormModel]="comp.form" [ngClass]="comp.data.classes?.form">
+        <form (ngSubmit)="submit()" [formGroup]="comp.form" [ngClass]="comp.data.classes?.form">
             <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form, settings: comp.settings}" (valueChange)="onQuestionValueChange($event)"></ef-question>
             <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.submit">
-                <input type="submit" [disabled]="!comp.form.valid" [value]="comp.data.settings.submitButtonText">
+                <button type="submit" [disabled]="!comp.form.valid">{{comp.data.settings.submitButtonText}}</button>
             </div>
         </form>
     `
@@ -52,7 +52,7 @@ export class EasyFormsComponent {
     onChanges: EventEmitter = new EventEmitter();
 
     private _data: EasyFormData;
-    private _form: ControlGroup;
+    private _form: FormGroup;
     private _matches: string[];
     
 

@@ -9,8 +9,8 @@
   },
   "main": "component.js",
   "dependencies": {
-    "@angular/common": "2.0.0-rc.2",
-    "@angular/core": "2.0.0-rc.2"
+    "@angular/forms": "2.0.0-rc.4",
+    "@angular/core": "2.0.0-rc.4"
   },
   "repository": {
     "type": "git",
