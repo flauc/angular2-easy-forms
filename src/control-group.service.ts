@@ -11,21 +11,20 @@ export class ControlGroupService {
             matches = [];
 
         questions.forEach(a => {
-
-            temp[a.key] = [a.value || ''];
+            let val = a.value || '',
+                validators = null;
 
             if (a.validation) {
 
                 if (Array.isArray(a.validation)) {
-                    let validators = [];
+                    validators = [];
                     a.validation.forEach(i => validators.push(setValidator(i, a)));
-                    temp[a.key].push(Validators.compose(validators))
                 }
 
-                else temp[a.key].push(setValidator(a.validation))
+                else validators = setValidator(a.validation)
             }
 
-            temp[a.key] = new FormControl(temp[a.key]);
+            temp[a.key] = new FormControl(val, validators);
         });
 
         toReturn['fbGroup'] = new FormGroup(temp);

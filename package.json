@@ -1,6 +1,6 @@
 {
   "name": "angular2-easy-forms",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "An Angular 2 library for simplification of form creation and validation.",
   "license": "MIT",
   "author": "filip.lauc93@gmail.com",
@@ -9,7 +9,7 @@
   },
   "main": "component.js",
   "dependencies": {
-    "@angular/forms": "2.0.0-rc.4",
+    "@angular/forms": "0.2.0",
     "@angular/core": "2.0.0-rc.4"
   },
   "repository": {
