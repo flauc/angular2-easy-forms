@@ -9,12 +9,13 @@
     var packages = {
             'app': {main: 'main.js', defaultExtension: 'js' },
             'rxjs': {defaultExtension: 'js'},
-            'angular2-easy-forms': {main: 'component.js', defaultExtension: 'js'}
+            'angular2-easy-forms': {main: 'components.js', defaultExtension: 'js'}
         },
         ngPackageNames = [
             'common',
             'compiler',
             'core',
+            'forms',
             'platform-browser',
             'platform-browser-dynamic',
             'upgrade'
