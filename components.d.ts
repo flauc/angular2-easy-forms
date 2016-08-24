@@ -1,1 +1,2 @@
-export * from './lib/easy-forms.component';
+export declare class EasyFormsModule {}
+export declare class EasyFormsComponent {}
