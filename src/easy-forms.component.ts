@@ -1,14 +1,11 @@
 import {Component, EventEmitter} from '@angular/core'
-import {FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {ControlGroupService} from './control-group.service'
-import {QuestionComponent} from './question.component'
 import {EasyFormData, Settings} from './data.interface'
 
 
 @Component({
     selector: 'easy-form',
-    providers: [ControlGroupService],
-    directives: [REACTIVE_FORM_DIRECTIVES, QuestionComponent],
     inputs: ['easyFormData'],
     outputs: ['onSubmit', 'onChanges'],
     template: `

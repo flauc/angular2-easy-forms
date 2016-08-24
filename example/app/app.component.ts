@@ -1,27 +1,14 @@
-import {Component} from '@angular/core'
-import {EasyFormsComponent} from 'easy-forms'
-
-function startsWithNumber(control) {
-
-    if (control.value !== '' && !isNaN(control.value.charAt(0))) {
-        return {'startsWithNumber': true};
-    }
-
-    return null;
-}
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'app',
-    directives: [EasyFormsComponent],
     template: `
-        <h1>Testing</h1>
         <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
-    `
+    `,
 })
-export class AppComponent {
-    constructor() {}
 
-    public data = {
+export class AppComponent {
+    data = {
         settings: {
             submitButtonText: 'Send',
             errorOnDirty: true
@@ -105,12 +92,4 @@ export class AppComponent {
             }
         ]
     };
-
-    onSubmit(event) {
-        console.log(event)
-    }
-
-    onChanges(event) {
-        console.log(event)
-    }
 }
