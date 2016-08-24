@@ -25,17 +25,27 @@ var map = { 'easy-forms': 'node_modules/angular2-easy-forms' },
 var packages = { 'easy-forms': {main: 'component.js', defaultExtension: 'js'} }
 ```
 
-Import it in the component where you want to use it. 
+Import the `EasyFormsModule` in your `app.module`. You also need to have the `FormsModule` imported for the library to work. 
 
 ```typescript
-import {EasyFormsComponent} from 'easy-forms'
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        EasyFormsModule
+    ],
+    providers: [],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent]
+})
+export class AppModule {}
 ```
 
 Then you define a list of questions as well as a settings and classes object if required and pass it to the component.
+
 ```typescript
 @Component({
     selector: 'app',
-    directives: [EasyFormsComponent],
     template: `
         <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
     `
