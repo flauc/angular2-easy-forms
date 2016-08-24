@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'app',
     template: `
-        <easy-form [easyFormData]="data" (onSubmit)="onSubmit($event)" (onChanges)="onChanges($event)"></easy-form>
+        <easy-form [easyFormData]="data"></easy-form>
     `,
 })
 
@@ -51,8 +51,7 @@ export class AppComponent {
                 key: 'password',
                 label: 'Password',
                 validation: [
-                    {type: 'required'},
-                    {type: 'custom', value: startsWithNumber, message: 'Please dont start with a number'}
+                    {type: 'required'}
                 ]
             },
             {

@@ -7,19 +7,12 @@ import {QuestionComponent} from '../lib/question.component';
 import {ControlGroupService} from './control-group.service';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule
-    ],
-    providers: [
-        ControlGroupService
-    ],
+    imports: [BrowserModule, FormsModule],
     declarations: [
         EasyFormsComponent,
         QuestionComponent
     ],
-    exports: [
-        EasyFormsComponent
-    ]
+    providers: [ControlGroupService],
+    exports: [EasyFormsComponent]
 })
 export class EasyFormsModule {}
