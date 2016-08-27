@@ -41,6 +41,14 @@ import {Question} from './data.interface'
                     </div>
                 </div>
                 
+                <textarea 
+                    *ngSwitchCase="'textarea'" 
+                    [formControlName]="question.key"
+                    (ngModelChange)="onValueChange($event)" 
+                    [id]="question.key"
+                    [ngClass]="question.classes?.question">   
+                </textarea> 
+                
                 <div *ngSwitchCase="'radio'" [ngClass]="question.classes?.question">
                     <div class="radio" *ngFor="let o of question.options">
                         <input 

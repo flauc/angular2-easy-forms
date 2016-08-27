@@ -5,7 +5,7 @@ export interface EasyFormData {
 }
 
 export interface Question {
-    type: 'text' | 'password' | 'number' | 'dropdown' | 'radio' | 'checkbox'
+    type: 'text' | 'password' | 'number' | 'dropdown' | 'radio' | 'checkbox' | 'textarea'
     key: string
     label?: string
     placeholder?: string
