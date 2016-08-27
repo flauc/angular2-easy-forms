@@ -1,4 +1,4 @@
-import {Component, EventEmitter} from '@angular/core'
+import {Component, EventEmitter, Input, Output} from '@angular/core'
 import {FormGroup} from '@angular/forms';
 import {ControlGroupService} from './control-group.service'
 import {EasyFormData, Settings} from './data.interface'
@@ -6,24 +6,19 @@ import {EasyFormData, Settings} from './data.interface'
 
 @Component({
     selector: 'easy-form',
-    inputs: ['easyFormData'],
-    outputs: ['onSubmit', 'onChanges'],
     template: `
         <form (ngSubmit)="submit()" [formGroup]="comp.form" [ngClass]="comp.data.classes?.form">
             <ef-question *ngFor="let q of comp.data.questions" [info]="{question: q, form: comp.form, settings: comp.settings}" (valueChange)="onQuestionValueChange($event)"></ef-question>
             <div *ngIf="comp.data.settings.submitButton" [ngClass]="comp.data.classes?.submit">
-                <button type="submit" [disabled]="!comp.form.valid">{{comp.data.settings.submitButtonText}}</button>
+                <button type="submit" [disabled]="!comp.form.valid && comp.settings.extraValidation">{{comp.data.settings.submitButtonText}}</button>
             </div>
         </form>
     `
 })
 export class EasyFormsComponent {
-    constructor(
-        private _controlGroup: ControlGroupService
-    ) {}
 
     // Input
-    set easyFormData(value: EasyFormData) {
+    @Input() set easyFormData(value: EasyFormData) {
         this._data = value;
         this._data.settings = this._setSettings(value.settings);
         this.sortQuestions();
@@ -32,26 +27,28 @@ export class EasyFormsComponent {
         this._form = cg.fbGroup;
         this._matches = cg.matches;
         this.comp = {
-            data: this._data, 
-            form: this._form, 
+            data: this._data,
+            form: this._form,
             settings: {
                 singleErrorMessage: this._data.settings.singleErrorMessage,
                 errorOnDirty: this._data.settings.errorOnDirty,
-                showValidation: this._data.settings.showValidation
+                showValidation: this._data.settings.showValidation,
+                extraValidation: this._data.settings.submitButtonExtraValidation || true
             }
         };
     }
-    
-    public comp: any;
-    
+
     // Outputs
-    onSubmit: EventEmitter = new EventEmitter();
-    onChanges: EventEmitter = new EventEmitter();
+    @Output() onSubmit: EventEmitter<any> = new EventEmitter();
+    @Output() onChanges: EventEmitter<any> = new EventEmitter();
+
+    comp: any;
 
     private _data: EasyFormData;
     private _form: FormGroup;
     private _matches: string[];
-    
+
+    constructor(private _controlGroup: ControlGroupService) {}
 
     submit() { this.onSubmit.emit(this._form.value) }
 
@@ -73,6 +70,7 @@ export class EasyFormsComponent {
         let defaultSettings = {
             submitButton: true,
             submitButtonText: 'Submit',
+            submitButtonExtraValidation: null,
             showValidation: true,
             singleErrorMessage: true,
             errorOnDirty: true

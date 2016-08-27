@@ -1,12 +1,9 @@
-import {Component, EventEmitter, HostBinding} from '@angular/core'
-import {FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core'
+import {FormGroup} from '@angular/forms';
 import {Question} from './data.interface'
 
 @Component({
     selector: 'ef-question',
-    inputs: ['info'],
-    outputs: ['valueChange'],
-    directives: [REACTIVE_FORM_DIRECTIVES],
     template: `
         <div [formGroup]="form">
             <label 
@@ -21,8 +18,8 @@ import {Question} from './data.interface'
                     *ngSwitchCase="'dropdown'"
                     [formControlName]="question.key"
                     (ngModelChange)="onValueChange($event)"
-                    [id]="question.key">
                     [ngClass]="question.classes?.question"
+                    [id]="question.key">
                     <option *ngFor="let o of question.options" [value]="o.value">{{o.name ? o.name : o.value}}</option>
                 </select>   
                 
@@ -86,7 +83,7 @@ export class QuestionComponent {
         return this.question && this.question.classes && this.question.classes.wrapper ? this.question.classes.wrapper : '';
     }
 
-    set info(value) {
+    @Input() set info(value) {
         this.question = value.question;
         this.form = value.form;
         this.settings = value.settings;
@@ -97,18 +94,19 @@ export class QuestionComponent {
         }
     }
 
+    @Output() valueChange: EventEmitter<any> = new EventEmitter();
+
+    question: Question;
+    form: FormGroup;
+
+    private checkboxIsRequired: boolean = false;
+    private settings: any;
+
     get showErrorMsg() {
         return this.settings.errorOnDirty ?
             !this.form.controls[this.question.key].valid && !this.form.controls[this.question.key].dirty :
             !this.form.controls[this.question.key].valid
     }
-
-    question: Question;
-    form: FormGroup;
-    valueChange: EventEmitter = new EventEmitter();
-
-    private checkboxIsRequired: boolean = false;
-    private settings: any;
 
     
     errors() {
@@ -140,8 +138,10 @@ export class QuestionComponent {
     }
 
     chackboxValueChange() {
-        if (this.question.value.length === 1) this.question.options.find(a => a.value === this.question.value[0]).disabled = true;
-        else this.question.options.forEach(a => a.disabled = false)
+        if (this.checkboxIsRequired) {
+            if (this.question.value.length === 1) this.question.options.find(a => a.value === this.question.value[0]).disabled = true;
+            else this.question.options.forEach(a => a.disabled = false)
+        }
     }
 
     onValueChange(event) { if (this.question.emitChanges !== false) this.valueChange.emit({[this.question.key]: event}) }
