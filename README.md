@@ -21,8 +21,8 @@ npm install --save angular2-easy-forms
 You also need to declare the library in your system.js config. 
 
 ```js
-var map = { 'easy-forms': 'node_modules/angular2-easy-forms' },
-var packages = { 'easy-forms': {main: 'components.js', defaultExtension: 'js'} }
+var map = { 'angular2-easy-forms': 'node_modules/angular2-easy-forms' },
+var packages = { 'angular2-easy-forms': {main: 'components.js', defaultExtension: 'js'} }
 ```
 
 Import the `EasyFormsModule` in your `app.module`. You also need to have the `FormsModule` imported for the library to work. 
