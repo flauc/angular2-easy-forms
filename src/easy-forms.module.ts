@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {EasyFormsComponent} from './easy-forms.component';
 import {QuestionComponent} from '../lib/question.component';
 import {ControlGroupService} from './control-group.service';
@@ -9,7 +9,6 @@ import {ControlGroupService} from './control-group.service';
     imports: [BrowserModule, FormsModule],
     declarations: [
         EasyFormsComponent,
-        REACTIVE_FORM_DIRECTIVES,
         QuestionComponent
     ],
     providers: [ControlGroupService],

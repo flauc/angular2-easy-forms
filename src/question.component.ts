@@ -1,9 +1,10 @@
 import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core'
-import {FormGroup} from '@angular/forms';
+import {FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
 import {Question} from './data.interface'
 
 @Component({
     selector: 'ef-question',
+    directives: [REACTIVE_FORM_DIRECTIVES],
     template: `
         <div [formGroup]="form">
             <label 
