@@ -18,20 +18,12 @@ You can install the library from npm with the following command:
 npm install --save angular2-easy-forms
 ```
 
-You also need to declare the library in your system.js config. 
-
-```js
-var map = { 'angular2-easy-forms': 'node_modules/angular2-easy-forms' },
-var packages = { 'angular2-easy-forms': {main: 'components.js', defaultExtension: 'js'} }
-```
-
 Import the `EasyFormsModule` in your `app.module`. You also need to have the `FormsModule` imported for the library to work. 
 
 ```typescript
 @NgModule({
     imports: [
         BrowserModule,
-        FormsModule,
         EasyFormsModule
     ],
     providers: [],
@@ -137,6 +129,15 @@ export class AppComponent {
 ```
 
 You can find an example of the setup in the example folder.
+
+### System.js
+
+If you are using `system.js` you also need to declare the library in your system.js config before you can use it. 
+
+```js
+var map = { 'angular2-easy-forms': 'node_modules/angular2-easy-forms' },
+var packages = { 'angular2-easy-forms': {main: 'components.js', defaultExtension: 'js'} }
+```
 
 ## Questions
 Each question can have the following properties: 

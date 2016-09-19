@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
     del = require('del'),
     browserSync = require('browser-sync').create(),
+    concat = require('gulp-concat'),
+    deleteLines = require('gulp-delete-lines'),
     paths = {
         src: [
             './lib/**',
@@ -10,7 +12,12 @@ var gulp = require('gulp'),
         exampleClean: [
             './example/node_modules/angular2-easy-forms/lib',
             './example/node_modules/angular2-easy-forms/src'
-        ]
+        ],
+        declarations: {
+            src: './lib/**/**.d.ts',
+            fileName: 'components.d.ts',
+            dest: './'
+        }
     };
 
 gulp.task('clean', () => {
@@ -20,6 +27,16 @@ gulp.task('clean', () => {
 gulp.task('move-example', ['clean'], () => {
     return gulp.src(paths.src, { base: './' }).pipe(gulp.dest(paths.example))
 });
+
+gulp.task('concat-dts', () => {
+    return gulp.src(paths.declarations.src)
+        .pipe(concat(paths.declarations.fileName))
+        .pipe(deleteLines({
+            'filters': [/^(import)((?!@angular).)*$/i]
+        }))
+        .pipe(gulp.dest(paths.declarations.dest));
+});
+
 
 gulp.task('serve', ['move-example'], () => {
 
