@@ -123,7 +123,7 @@ export class QuestionComponent {
     }
 
     setRadio(option) {
-        this.form.controls[this.question.key].updateValue(option.value);
+        this.form.controls[this.question.key].setValue(option.value);
         this.onValueChange(option.value)
     }
 
@@ -133,7 +133,7 @@ export class QuestionComponent {
         if (index !== -1) this.question.value.splice(index, 1);
         else this.question.value.push(option.value);
 
-        this.form.controls[this.question.key].updateValue(this.question.value);
+        this.form.controls[this.question.key].setValue(this.question.value);
         this.onValueChange(this.question.value)
     }
 
