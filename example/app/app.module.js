@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
-var angular2_easy_forms_1 = require('angular2-easy-forms');
+var angular2_easy_forms_1 = require('/angular2-easy-forms');
 var AppModule = (function () {
     function AppModule() {
     }
