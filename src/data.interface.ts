@@ -1,7 +1,7 @@
 export interface EasyFormData {
     questions: Question[]
-    settings: Settings
-    classes: Classes
+    settings?: Settings
+    classes?: Classes
 }
 
 export interface Question {
@@ -23,17 +23,17 @@ export interface Question {
 }
 
 export interface Settings {
-    submitButton: boolean
-    submitButtonText: string
-    submitButtonExtraValidation: boolean
-    singleErrorMessage: boolean
-    showValidation: boolean
-    errorOnDirty: boolean
+    submitButton?: boolean
+    submitButtonText?: string
+    submitButtonExtraValidation?: boolean
+    singleErrorMessage?: boolean
+    showValidation?: boolean
+    errorOnDirty?: boolean
 }
 
 export interface Classes {
-    form: string | Array<string>
-    submit: string | Array<string>
+    form?: string | Array<string>
+    submit?: string | Array<string>
 }
 
 export interface Validation {
